@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+      "passed": false,
+      "evidence": "Presenta formato numerado alternativo (`## 1) Contexto y objetivo`, `## 2) Alcance funcional`, etc.) y no la plantilla principal requerida."
+    },
+    {
+      "text": "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+      "passed": true,
+      "evidence": "En contexto indica diseño `desde cero` y el documento modela flujo completo de reprogramacion autonoma, no una mejora puntual."
+    },
+    {
+      "text": "Detalla permisos y flujos por actor (paciente, soporte y medico).",
+      "passed": false,
+      "evidence": "Identifica actores y necesidades, pero no detalla permisos por actor con el nivel requerido (solo menciona de forma general capacidades de soporte/medico)."
+    },
+    {
+      "text": "Incluye validaciones temporales de ventana de 72h con comportamiento esperado.",
+      "passed": true,
+      "evidence": "Reglas de negocio y criterios cubren explicitamente `mas de 72h` vs `72h o menos`, incluyendo derivacion a soporte y bloqueo."
+    },
+    {
+      "text": "Cubre trazabilidad legal, errores y recuperacion en casos borde.",
+      "passed": true,
+      "evidence": "Incluye seccion de trazabilidad/legal (logs inmutables, UTC, actor) y manejo de errores (conflicto de slot, perdida de elegibilidad, caida de integracion)."
+    },
+    {
+      "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+      "passed": false,
+      "evidence": "No estructura Historias 1/2/3 con criterios por historia; usa casos de uso y criterios globales."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 3,
+    "total": 6,
+    "pass_rate": 0.5
+  }
+}

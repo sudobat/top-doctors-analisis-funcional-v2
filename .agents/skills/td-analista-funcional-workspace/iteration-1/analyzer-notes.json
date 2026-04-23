@@ -1,0 +1,8 @@
+[
+  "Per-assertion pattern: the template-header assertion ('La salida usa exactamente los encabezados principales de la plantilla objetivo.') is 5/5 pass with_skill and 0/5 pass without_skill, making structure adherence the clearest differentiator in this benchmark.",
+  "Cross-eval stability: without_skill is perfectly flat at 0.5 pass_rate in every eval (stddev 0.0), while with_skill is near-ceiling (mean 0.9667) with only one miss (eval 2, run 1) on the assertion about explicitly reflecting design-absence limitations in 'Dudas abiertas'.",
+  "Assertion-level consistency across evals: with_skill keeps 100% pass on most domain-specific checks (rules, observability, channel logic, traceability), suggesting the main residual risk is not core functional depth but occasional omission of a specific framing requirement (as seen in eval 2).",
+  "Pattern hidden by aggregate delta (+0.47): several without_skill failures are recurrent formatting/granularity misses (template headings, per-historia acceptance criteria, explicit AS-IS/TO-BE framing in some evals), while some technical-content assertions still pass without_skill (e.g., anti-duplicate rules, observability, NOTI-88 dependencies in eval 4).",
+  "Metric caveat: time_seconds, tokens, and tool_calls are 0 in every run for both configurations, and metadata still contains placeholder model names ('<model-name>'); treat performance/cost comparisons as non-instrumented placeholders rather than real efficiency evidence.",
+  "Variance caveat: metadata says runs_per_configuration=3, but benchmark data currently shows one recorded run per eval/config pair; conclusions are robust for observed patterns but not yet a true multi-run variance read at per-eval level."
+]

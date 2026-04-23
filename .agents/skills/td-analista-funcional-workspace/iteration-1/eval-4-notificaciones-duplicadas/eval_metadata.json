@@ -1,0 +1,13 @@
+{
+  "eval_id": 4,
+  "eval_name": "notificaciones-duplicadas",
+  "prompt": "Necesitamos refinar una funcionalidad existente de notificaciones push porque actualmente se envian duplicadas. No hay prototipo nuevo, pero si logs y una epic NOTI-88. El analisis debe incluir observabilidad y criterios de aceptacion que QA pueda automatizar.",
+  "assertions": [
+    "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+    "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+    "Define reglas anti-duplicado de notificaciones con condiciones verificables.",
+    "Incluye observabilidad concreta (eventos, logs, alertas, metricas).",
+    "Cada historia funcional contiene criterios de aceptacion verificables.",
+    "Refleja dependencias y riesgos tecnicos asociados a la epic NOTI-88."
+  ]
+}

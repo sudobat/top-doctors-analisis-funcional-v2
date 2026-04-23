@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+      "passed": true,
+      "evidence": "Sigue la estructura objetivo con `## Descripcion funcional`, `## Historias funcionales`, `## Requisitos no funcionales`, `## Supuestos, dependencias y riesgos`, `## Fuera de alcance`, `## Dudas abiertas` y `## Checklist de validacion`."
+    },
+    {
+      "text": "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+      "passed": true,
+      "evidence": "En metadatos declara `Tipo: Nueva funcionalidad` y todo el contenido define creacion end-to-end de lista de espera (alta, adjudicacion, notificacion, conversion)."
+    },
+    {
+      "text": "Integra el prototipo como referencia funcional y de decisiones de flujo.",
+      "passed": true,
+      "evidence": "Incluye `Prototipo Figma completo` y usa esa referencia en decisiones de flujo/mensajeria, por ejemplo diferencias de experiencia y notas UX por canal."
+    },
+    {
+      "text": "Incluye reglas operativas por canal (web y call center) con detalle verificable.",
+      "passed": true,
+      "evidence": "Historia 1 cubre web (`origin_channel = WEB`) y Historia 2 call center (`origin_channel = CALL_CENTER`, `agent_id`, auditoria, conflicto de concurrencia)."
+    },
+    {
+      "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+      "passed": true,
+      "evidence": "Cada historia incluye multiples criterios verificables con condiciones y resultados observables (duplicados, TTL, estados, eventos, errores tecnicos)."
+    },
+    {
+      "text": "Incluye requisitos no funcionales medibles y riesgos/dependencias concretos.",
+      "passed": true,
+      "evidence": "Define NFR medibles (`<=2.0 s p95`, `<=60 s`, `5k solicitudes`) y riesgos/dependencias concretos por equipos y componentes."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

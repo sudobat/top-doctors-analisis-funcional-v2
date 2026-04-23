@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+      "passed": true,
+      "evidence": "Incluye la estructura esperada: `## Descripcion funcional`, `## Historias funcionales`, `## Requisitos no funcionales`, `## Supuestos, dependencias y riesgos`, `## Fuera de alcance`, `## Dudas abiertas` y `## Checklist de validacion`."
+    },
+    {
+      "text": "Incluye enfoque de mejora con evidencia AS-IS y TO-BE.",
+      "passed": true,
+      "evidence": "Expone problema actual (abandono en direccion) y solucion objetivo; ademas referencia comparativa en dependencias: `tablero comparativo AS-IS vs TO-BE`."
+    },
+    {
+      "text": "Describe validaciones de direccion y codigo postal con reglas concretas.",
+      "passed": true,
+      "evidence": "Define reglas concretas: regex/longitud por pais, coherencia `codigo postal <-> ciudad/provincia`, prioridad de errores y estados `INVALIDA_FORMATO`, `INVALIDA_COHERENCIA`, `INVALIDA_ZONA`."
+    },
+    {
+      "text": "Incluye estados/transiciones y manejo de errores o casos borde relevantes.",
+      "passed": true,
+      "evidence": "Detalla estados (`IDLE_SIN_DATOS`, `VALIDADA`, `ERROR_TECNICO_VALIDACION`) y transiciones como volver a `PENDIENTE_VALIDACION_POSTAL` al cambiar `codigo_postal`; cubre timeout, cambio de pais y navegacion atras/adelante."
+    },
+    {
+      "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+      "passed": true,
+      "evidence": "Las 3 historias incluyen criterios en formato verificable (Given/When/Then), p. ej. bloqueo del CTA cuando hay formato invalido y reintento ante fallo tecnico."
+    },
+    {
+      "text": "La seccion de dudas abiertas contiene preguntas accionables y no vacias.",
+      "passed": true,
+      "evidence": "La seccion `## Dudas abiertas` contiene preguntas concretas de decision (paises soportados, politica fallback, baseline de abandono, dependencias de COM-2419)."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

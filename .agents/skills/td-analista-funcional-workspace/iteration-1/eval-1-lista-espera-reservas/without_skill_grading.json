@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+      "passed": false,
+      "evidence": "Usa esquema numerado propio (`## 1. Encabezado`, `## 2. Objetivo de negocio`, etc.) y no respeta los encabezados principales exactos de la plantilla."
+    },
+    {
+      "text": "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+      "passed": true,
+      "evidence": "Declara la funcionalidad como nueva y define un flujo completo de creacion de waitlist, matching, propuesta y conversion."
+    },
+    {
+      "text": "Integra el prototipo como referencia funcional y de decisiones de flujo.",
+      "passed": true,
+      "evidence": "Incluye `Fuente de diseño: Prototipo completo en Figma` y referencia de alineacion UX en `Consideraciones UX`."
+    },
+    {
+      "text": "Incluye reglas operativas por canal (web y call center) con detalle verificable.",
+      "passed": true,
+      "evidence": "Define `RF-01 Alta en lista de espera (web)` y `RF-02 Alta en lista de espera (call center)` con reglas de validacion, trazabilidad y campos."
+    },
+    {
+      "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+      "passed": false,
+      "evidence": "No hay Historias 1/2/3 con criterios por historia; solo hay requisitos y una seccion de `Criterios de aceptación (UAT)` global."
+    },
+    {
+      "text": "Incluye requisitos no funcionales medibles y riesgos/dependencias concretos.",
+      "passed": false,
+      "evidence": "Riesgos/dependencias son concretos, pero los NFR son mayormente no medibles (`tiempo acotado`, `fallback operacional`) sin SLAs cuantificados."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 3,
+    "total": 6,
+    "pass_rate": 0.5
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "eval_id": 1,
+  "eval_name": "lista-espera-reservas",
+  "prompt": "Necesito una funcionalidad nueva: lista de espera para reservas cuando un slot esta completo. Debe servir para web y call center. Tenemos prototipo completo en Figma y una iniciativa llamada RES-WAITLIST-Q3. Quiero bajar a mucho detalle operativo para que desarrollo y QA puedan arrancar.",
+  "assertions": [
+    "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+    "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+    "Integra el prototipo como referencia funcional y de decisiones de flujo.",
+    "Incluye reglas operativas por canal (web y call center) con detalle verificable.",
+    "Cada historia funcional contiene criterios de aceptacion verificables.",
+    "Incluye requisitos no funcionales medibles y riesgos/dependencias concretos."
+  ]
+}

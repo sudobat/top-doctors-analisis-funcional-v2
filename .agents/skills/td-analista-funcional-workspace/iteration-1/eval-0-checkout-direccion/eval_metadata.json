@@ -1,0 +1,13 @@
+{
+  "eval_id": 0,
+  "eval_name": "checkout-direccion",
+  "prompt": "Quiero definir una mejora en el checkout actual. Hoy muchos usuarios abandonan al introducir la direccion. Tenemos flujo web y app. Necesito un analisis funcional detallado para redisenar solo el paso de direccion y validacion postal, manteniendo metodos de pago como estan. Tenemos Figma parcial del nuevo paso y un ticket JIRA COM-2419.",
+  "assertions": [
+    "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+    "Incluye enfoque de mejora con evidencia AS-IS y TO-BE.",
+    "Describe validaciones de direccion y codigo postal con reglas concretas.",
+    "Incluye estados/transiciones y manejo de errores o casos borde relevantes.",
+    "Cada historia funcional contiene criterios de aceptacion verificables.",
+    "La seccion de dudas abiertas contiene preguntas accionables y no vacias."
+  ]
+}

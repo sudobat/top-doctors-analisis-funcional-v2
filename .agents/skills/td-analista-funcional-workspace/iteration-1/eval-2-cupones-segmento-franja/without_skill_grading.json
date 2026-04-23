@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+      "passed": false,
+      "evidence": "Usa formato alternativo (`## 1. Contexto y problema`, `## 2. Objetivo funcional`, etc.) y no la plantilla principal objetivo."
+    },
+    {
+      "text": "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+      "passed": false,
+      "evidence": "Describe problema y objetivo, pero no presenta comparativa AS-IS/TO-BE explicita ni seccionada de forma verificable."
+    },
+    {
+      "text": "Detalla reglas de segmentacion y franja horaria con validaciones y prioridades.",
+      "passed": true,
+      "evidence": "Incluye RF de segmento/franja con validaciones (`cruce de medianoche`, inclusion/exclusion, evaluacion por AND y precedencia de bloqueo)."
+    },
+    {
+      "text": "Cubre casuistica heredada, excepciones y posibles conflictos de reglas.",
+      "passed": true,
+      "evidence": "Incluye `RF-04 Precedencia y compatibilidad con reglas heredadas`, casuistica de conflictos y riesgo por reglas heredadas no documentadas."
+    },
+    {
+      "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+      "passed": true,
+      "evidence": "Presenta HU-01/02/03 con criterios de aceptacion verificables, aunque no use exactamente el formato de plantilla del skill."
+    },
+    {
+      "text": "Distingue claramente limitaciones por ausencia de diseno final en dudas abiertas.",
+      "passed": false,
+      "evidence": "Declara que no hay diseño final en contexto inicial, pero la seccion `Preguntas abiertas` no explicita limitaciones de diseño como duda central de cierre."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 3,
+    "total": 6,
+    "pass_rate": 0.5
+  }
+}

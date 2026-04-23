@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+      "passed": false,
+      "evidence": "Usa estructura propia numerada (`## 1) Contexto y problema`, `## 2) Objetivo funcional`, etc.) y no sigue los encabezados principales exactos de la plantilla."
+    },
+    {
+      "text": "Incluye enfoque de mejora con evidencia AS-IS y TO-BE.",
+      "passed": true,
+      "evidence": "Describe situacion actual (`tasa de abandono elevada`) y propuesta de mejora (`Propuesta funcional del nuevo paso de direccion`) con alcance de rediseño."
+    },
+    {
+      "text": "Describe validaciones de direccion y codigo postal con reglas concretas.",
+      "passed": true,
+      "evidence": "Incluye reglas concretas de formato y consistencia: validacion por pais, combinacion codigo postal/provincia/ciudad, mensajes de error especificos y validacion en `on blur`."
+    },
+    {
+      "text": "Incluye estados/transiciones y manejo de errores o casos borde relevantes.",
+      "passed": false,
+      "evidence": "Incluye errores y algunos casos borde, pero no define estados/transiciones funcionales explicitos del flujo (no hay modelo de estados comparable al requerido)."
+    },
+    {
+      "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+      "passed": false,
+      "evidence": "No presenta historias funcionales (Historia 1/2/3) con criterios por historia; solo incluye `Criterios de aceptación (alto nivel)` globales."
+    },
+    {
+      "text": "La seccion de dudas abiertas contiene preguntas accionables y no vacias.",
+      "passed": true,
+      "evidence": "Incluye `Preguntas abiertas para cerrar especificación` con preguntas concretas sobre paises, politica de persistencia, validacion postal y faltantes de Figma."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 3,
+    "total": 6,
+    "pass_rate": 0.5
+  }
+}

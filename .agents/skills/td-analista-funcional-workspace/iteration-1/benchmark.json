@@ -1,0 +1,554 @@
+{
+  "metadata": {
+    "skill_name": "td-analista-funcional",
+    "skill_path": "/home/sudobat/Code/top-doctors-v2/.agents/skills/td-analista-funcional/SKILL.md",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-04-23T08:52:25Z",
+    "evals_run": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+          "passed": true,
+          "evidence": "Incluye la estructura esperada: `## Descripcion funcional`, `## Historias funcionales`, `## Requisitos no funcionales`, `## Supuestos, dependencias y riesgos`, `## Fuera de alcance`, `## Dudas abiertas` y `## Checklist de validacion`."
+        },
+        {
+          "text": "Incluye enfoque de mejora con evidencia AS-IS y TO-BE.",
+          "passed": true,
+          "evidence": "Expone problema actual (abandono en direccion) y solucion objetivo; ademas referencia comparativa en dependencias: `tablero comparativo AS-IS vs TO-BE`."
+        },
+        {
+          "text": "Describe validaciones de direccion y codigo postal con reglas concretas.",
+          "passed": true,
+          "evidence": "Define reglas concretas: regex/longitud por pais, coherencia `codigo postal <-> ciudad/provincia`, prioridad de errores y estados `INVALIDA_FORMATO`, `INVALIDA_COHERENCIA`, `INVALIDA_ZONA`."
+        },
+        {
+          "text": "Incluye estados/transiciones y manejo de errores o casos borde relevantes.",
+          "passed": true,
+          "evidence": "Detalla estados (`IDLE_SIN_DATOS`, `VALIDADA`, `ERROR_TECNICO_VALIDACION`) y transiciones como volver a `PENDIENTE_VALIDACION_POSTAL` al cambiar `codigo_postal`; cubre timeout, cambio de pais y navegacion atras/adelante."
+        },
+        {
+          "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+          "passed": true,
+          "evidence": "Las 3 historias incluyen criterios en formato verificable (Given/When/Then), p. ej. bloqueo del CTA cuando hay formato invalido y reintento ante fallo tecnico."
+        },
+        {
+          "text": "La seccion de dudas abiertas contiene preguntas accionables y no vacias.",
+          "passed": true,
+          "evidence": "La seccion `## Dudas abiertas` contiene preguntas concretas de decision (paises soportados, politica fallback, baseline de abandono, dependencias de COM-2419)."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+          "passed": true,
+          "evidence": "Sigue la estructura objetivo con `## Descripcion funcional`, `## Historias funcionales`, `## Requisitos no funcionales`, `## Supuestos, dependencias y riesgos`, `## Fuera de alcance`, `## Dudas abiertas` y `## Checklist de validacion`."
+        },
+        {
+          "text": "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+          "passed": true,
+          "evidence": "En metadatos declara `Tipo: Nueva funcionalidad` y todo el contenido define creacion end-to-end de lista de espera (alta, adjudicacion, notificacion, conversion)."
+        },
+        {
+          "text": "Integra el prototipo como referencia funcional y de decisiones de flujo.",
+          "passed": true,
+          "evidence": "Incluye `Prototipo Figma completo` y usa esa referencia en decisiones de flujo/mensajeria, por ejemplo diferencias de experiencia y notas UX por canal."
+        },
+        {
+          "text": "Incluye reglas operativas por canal (web y call center) con detalle verificable.",
+          "passed": true,
+          "evidence": "Historia 1 cubre web (`origin_channel = WEB`) y Historia 2 call center (`origin_channel = CALL_CENTER`, `agent_id`, auditoria, conflicto de concurrencia)."
+        },
+        {
+          "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+          "passed": true,
+          "evidence": "Cada historia incluye multiples criterios verificables con condiciones y resultados observables (duplicados, TTL, estados, eventos, errores tecnicos)."
+        },
+        {
+          "text": "Incluye requisitos no funcionales medibles y riesgos/dependencias concretos.",
+          "passed": true,
+          "evidence": "Define NFR medibles (`<=2.0 s p95`, `<=60 s`, `5k solicitudes`) y riesgos/dependencias concretos por equipos y componentes."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8333,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+          "passed": true,
+          "evidence": "Mantiene la estructura esperada con `## Descripcion funcional`, `## Historias funcionales`, `## Requisitos no funcionales`, `## Supuestos, dependencias y riesgos`, `## Fuera de alcance`, `## Dudas abiertas` y `## Checklist de validacion`."
+        },
+        {
+          "text": "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+          "passed": true,
+          "evidence": "En descripcion indica limitaciones actuales del panel (AS-IS) y define mejoras objetivo; ademas en Historia 2 explicita `Orden de evaluacion propuesto` y en Historia 1 compatibilidad hacia atras."
+        },
+        {
+          "text": "Detalla reglas de segmentacion y franja horaria con validaciones y prioridades.",
+          "passed": true,
+          "evidence": "Define selector multivalor, validaciones de lista vacia, no solapes, inicio<fin, codigos de rechazo y prioridad de evaluacion (`reglas heredadas bloqueantes`, luego segmento/franja)."
+        },
+        {
+          "text": "Cubre casuistica heredada, excepciones y posibles conflictos de reglas.",
+          "passed": true,
+          "evidence": "Incluye matriz de precedencia, advertencias por anulacion de reglas nuevas, deprecacion de legacy y riesgos por ambiguedad de reglas heredadas."
+        },
+        {
+          "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+          "passed": true,
+          "evidence": "Las 3 historias incluyen criterios verificables con estados/resultados concretos (codigos `REJECTED`, version de regla, rollback, conflicto de solapes, etc.)."
+        },
+        {
+          "text": "Distingue claramente limitaciones por ausencia de diseno final en dudas abiertas.",
+          "passed": false,
+          "evidence": "Se reconoce en contexto/riesgos que no hay dise\u00f1o final, pero en `## Dudas abiertas` no se formulan preguntas explicitas sobre esa limitacion de dise\u00f1o."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+          "passed": true,
+          "evidence": "Respeta la plantilla con `## Descripcion funcional`, `## Historias funcionales`, `## Requisitos no funcionales`, `## Supuestos, dependencias y riesgos`, `## Fuera de alcance`, `## Dudas abiertas` y `## Checklist de validacion`."
+        },
+        {
+          "text": "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+          "passed": true,
+          "evidence": "Declara `Tipo: Nueva funcionalidad` y define un dise\u00f1o desde cero para flujo autonomo, no un simple ajuste incremental."
+        },
+        {
+          "text": "Detalla permisos y flujos por actor (paciente, soporte y medico).",
+          "passed": true,
+          "evidence": "Historia 1 cubre paciente, Historia 2 medico/paciente (sincronizacion/notificaciones) y Historia 3 soporte con permisos `SoporteReprogramaciones` y restricciones de accion."
+        },
+        {
+          "text": "Incluye validaciones temporales de ventana de 72h con comportamiento esperado.",
+          "passed": true,
+          "evidence": "Define regla `mas de 72 horas` y criterio explicito de bloqueo `72 horas o menos`; incluye escenarios de 73h, <=72h y cruce por timeout."
+        },
+        {
+          "text": "Cubre trazabilidad legal, errores y recuperacion en casos borde.",
+          "passed": true,
+          "evidence": "Incluye snapshot legal, campos auditables, estados de incidencia y manejo de colisiones/fallos de agenda/notificaciones con recuperacion controlada."
+        },
+        {
+          "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+          "passed": true,
+          "evidence": "Las 3 historias traen criterios verificables con condiciones/resultados concretos (`403`, `EscaladoSoporte`, estados de cita, trazabilidad por actor)."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+          "passed": true,
+          "evidence": "Sigue la estructura de plantilla: `## Descripcion funcional`, `## Historias funcionales`, `## Requisitos no funcionales`, `## Supuestos, dependencias y riesgos`, `## Fuera de alcance`, `## Dudas abiertas` y `## Checklist de validacion`."
+        },
+        {
+          "text": "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+          "passed": true,
+          "evidence": "Historia 1 explicita `AS-IS` y `TO-BE` en el flujo de notificaciones push, con brecha actual y comportamiento objetivo de deduplicacion."
+        },
+        {
+          "text": "Define reglas anti-duplicado de notificaciones con condiciones verificables.",
+          "passed": true,
+          "evidence": "Define `dedupe_key` deterministica, ventana parametrizable, atomicidad ante concurrencia y resultado `suprimido_por_duplicado` con criterios de aceptacion verificables."
+        },
+        {
+          "text": "Incluye observabilidad concreta (eventos, logs, alertas, metricas).",
+          "passed": true,
+          "evidence": "Incluye eventos (`push_dedupe_checked`, `push_suppressed_duplicate`, etc.), campos de log obligatorios, metricas (`push_duplicate_rate`) y alertas por umbrales."
+        },
+        {
+          "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+          "passed": true,
+          "evidence": "Las 3 historias presentan criterios verificables con estados/resultados concretos (concurrencia, redelivery, trazabilidad, alertas, N reintentos)."
+        },
+        {
+          "text": "Refleja dependencias y riesgos tecnicos asociados a la epic NOTI-88.",
+          "passed": true,
+          "evidence": "Relaciona explicitamente `Epica: NOTI-88`, tickets asociados y riesgos tecnicos (falsos positivos de dedupe, falta de `trace_id`) junto a dependencias de plataforma/data."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 3,
+        "failed": 3,
+        "total": 6,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+          "passed": false,
+          "evidence": "Usa estructura propia numerada (`## 1) Contexto y problema`, `## 2) Objetivo funcional`, etc.) y no sigue los encabezados principales exactos de la plantilla."
+        },
+        {
+          "text": "Incluye enfoque de mejora con evidencia AS-IS y TO-BE.",
+          "passed": true,
+          "evidence": "Describe situacion actual (`tasa de abandono elevada`) y propuesta de mejora (`Propuesta funcional del nuevo paso de direccion`) con alcance de redise\u00f1o."
+        },
+        {
+          "text": "Describe validaciones de direccion y codigo postal con reglas concretas.",
+          "passed": true,
+          "evidence": "Incluye reglas concretas de formato y consistencia: validacion por pais, combinacion codigo postal/provincia/ciudad, mensajes de error especificos y validacion en `on blur`."
+        },
+        {
+          "text": "Incluye estados/transiciones y manejo de errores o casos borde relevantes.",
+          "passed": false,
+          "evidence": "Incluye errores y algunos casos borde, pero no define estados/transiciones funcionales explicitos del flujo (no hay modelo de estados comparable al requerido)."
+        },
+        {
+          "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+          "passed": false,
+          "evidence": "No presenta historias funcionales (Historia 1/2/3) con criterios por historia; solo incluye `Criterios de aceptaci\u00f3n (alto nivel)` globales."
+        },
+        {
+          "text": "La seccion de dudas abiertas contiene preguntas accionables y no vacias.",
+          "passed": true,
+          "evidence": "Incluye `Preguntas abiertas para cerrar especificaci\u00f3n` con preguntas concretas sobre paises, politica de persistencia, validacion postal y faltantes de Figma."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 3,
+        "failed": 3,
+        "total": 6,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+          "passed": false,
+          "evidence": "Usa esquema numerado propio (`## 1. Encabezado`, `## 2. Objetivo de negocio`, etc.) y no respeta los encabezados principales exactos de la plantilla."
+        },
+        {
+          "text": "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+          "passed": true,
+          "evidence": "Declara la funcionalidad como nueva y define un flujo completo de creacion de waitlist, matching, propuesta y conversion."
+        },
+        {
+          "text": "Integra el prototipo como referencia funcional y de decisiones de flujo.",
+          "passed": true,
+          "evidence": "Incluye `Fuente de dise\u00f1o: Prototipo completo en Figma` y referencia de alineacion UX en `Consideraciones UX`."
+        },
+        {
+          "text": "Incluye reglas operativas por canal (web y call center) con detalle verificable.",
+          "passed": true,
+          "evidence": "Define `RF-01 Alta en lista de espera (web)` y `RF-02 Alta en lista de espera (call center)` con reglas de validacion, trazabilidad y campos."
+        },
+        {
+          "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+          "passed": false,
+          "evidence": "No hay Historias 1/2/3 con criterios por historia; solo hay requisitos y una seccion de `Criterios de aceptaci\u00f3n (UAT)` global."
+        },
+        {
+          "text": "Incluye requisitos no funcionales medibles y riesgos/dependencias concretos.",
+          "passed": false,
+          "evidence": "Riesgos/dependencias son concretos, pero los NFR son mayormente no medibles (`tiempo acotado`, `fallback operacional`) sin SLAs cuantificados."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 3,
+        "failed": 3,
+        "total": 6,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+          "passed": false,
+          "evidence": "Usa formato alternativo (`## 1. Contexto y problema`, `## 2. Objetivo funcional`, etc.) y no la plantilla principal objetivo."
+        },
+        {
+          "text": "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+          "passed": false,
+          "evidence": "Describe problema y objetivo, pero no presenta comparativa AS-IS/TO-BE explicita ni seccionada de forma verificable."
+        },
+        {
+          "text": "Detalla reglas de segmentacion y franja horaria con validaciones y prioridades.",
+          "passed": true,
+          "evidence": "Incluye RF de segmento/franja con validaciones (`cruce de medianoche`, inclusion/exclusion, evaluacion por AND y precedencia de bloqueo)."
+        },
+        {
+          "text": "Cubre casuistica heredada, excepciones y posibles conflictos de reglas.",
+          "passed": true,
+          "evidence": "Incluye `RF-04 Precedencia y compatibilidad con reglas heredadas`, casuistica de conflictos y riesgo por reglas heredadas no documentadas."
+        },
+        {
+          "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+          "passed": true,
+          "evidence": "Presenta HU-01/02/03 con criterios de aceptacion verificables, aunque no use exactamente el formato de plantilla del skill."
+        },
+        {
+          "text": "Distingue claramente limitaciones por ausencia de diseno final en dudas abiertas.",
+          "passed": false,
+          "evidence": "Declara que no hay dise\u00f1o final en contexto inicial, pero la seccion `Preguntas abiertas` no explicita limitaciones de dise\u00f1o como duda central de cierre."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 3,
+        "failed": 3,
+        "total": 6,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+          "passed": false,
+          "evidence": "Presenta formato numerado alternativo (`## 1) Contexto y objetivo`, `## 2) Alcance funcional`, etc.) y no la plantilla principal requerida."
+        },
+        {
+          "text": "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+          "passed": true,
+          "evidence": "En contexto indica dise\u00f1o `desde cero` y el documento modela flujo completo de reprogramacion autonoma, no una mejora puntual."
+        },
+        {
+          "text": "Detalla permisos y flujos por actor (paciente, soporte y medico).",
+          "passed": false,
+          "evidence": "Identifica actores y necesidades, pero no detalla permisos por actor con el nivel requerido (solo menciona de forma general capacidades de soporte/medico)."
+        },
+        {
+          "text": "Incluye validaciones temporales de ventana de 72h con comportamiento esperado.",
+          "passed": true,
+          "evidence": "Reglas de negocio y criterios cubren explicitamente `mas de 72h` vs `72h o menos`, incluyendo derivacion a soporte y bloqueo."
+        },
+        {
+          "text": "Cubre trazabilidad legal, errores y recuperacion en casos borde.",
+          "passed": true,
+          "evidence": "Incluye seccion de trazabilidad/legal (logs inmutables, UTC, actor) y manejo de errores (conflicto de slot, perdida de elegibilidad, caida de integracion)."
+        },
+        {
+          "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+          "passed": false,
+          "evidence": "No estructura Historias 1/2/3 con criterios por historia; usa casos de uso y criterios globales."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 3,
+        "failed": 3,
+        "total": 6,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+          "passed": false,
+          "evidence": "El documento usa encabezados numerados (`## 1) Contexto y problema`, `## 2) Objetivo del refinamiento`, etc.) en lugar de la plantilla objetivo."
+        },
+        {
+          "text": "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+          "passed": false,
+          "evidence": "Describe problema y flujo propuesto, pero no presenta comparativa AS-IS/TO-BE explicita con ese encuadre en la salida."
+        },
+        {
+          "text": "Define reglas anti-duplicado de notificaciones con condiciones verificables.",
+          "passed": true,
+          "evidence": "Incluye `dedup_key` deterministica, ventana de deduplicacion, idempotencia por evento, concurrencia entre workers y criterios QA concretos."
+        },
+        {
+          "text": "Incluye observabilidad concreta (eventos, logs, alertas, metricas).",
+          "passed": true,
+          "evidence": "Detalla campos de logging obligatorios, metricas de salud (tasa de duplicados, latencia p95) y alertas operativas."
+        },
+        {
+          "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+          "passed": false,
+          "evidence": "No contiene historias funcionales 1/2/3; presenta criterios de aceptacion globales `CA-01..CA-06`."
+        },
+        {
+          "text": "Refleja dependencias y riesgos tecnicos asociados a la epic NOTI-88.",
+          "passed": true,
+          "evidence": "Referencia explicitamente `NOTI-88` y documenta dependencias con plataforma/infra/QA junto a riesgos tecnicos y mitigaciones."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.9667,
+        "stddev": 0.0746,
+        "min": 0.8333,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.5,
+        "stddev": 0.0,
+        "min": 0.5,
+        "max": 0.5
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.47",
+      "time_seconds": "+0.0",
+      "tokens": "+0"
+    }
+  },
+  "notes": [
+    "Per-assertion pattern: the template-header assertion is 5/5 pass with_skill and 0/5 pass without_skill, making structure adherence the clearest differentiator.",
+    "Cross-eval stability: without_skill remains at 0.5 pass_rate in every eval, while with_skill averages 0.9667 with one miss in eval 2.",
+    "Residual risk with skill is occasional omission of specific framing in Dudas abiertas, not general lack of functional depth.",
+    "Some domain assertions still pass without_skill, so the gain is not only domain knowledge but consistency in structure and verification.",
+    "Time/tokens/tool calls are placeholders (0 everywhere) for this iteration and should not be interpreted as real efficiency metrics.",
+    "Metadata indicates 3 runs per configuration, but this iteration has one recorded run per eval/config."
+  ]
+}

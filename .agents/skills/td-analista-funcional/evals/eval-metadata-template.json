@@ -1,0 +1,22 @@
+{
+  "eval_id": 0,
+  "eval_name": "nombre-descriptivo-del-caso",
+  "prompt": "Prompt exacto usado para el caso.",
+  "assertions": [
+    {
+      "name": "usa-plantilla-exacta",
+      "description": "La salida mantiene la estructura y orden de la plantilla objetivo.",
+      "type": "manual_or_programmatic"
+    },
+    {
+      "name": "detalle-solucion-bajo-nivel",
+      "description": "La salida contiene reglas, validaciones, estados/transiciones y comportamiento ante errores.",
+      "type": "manual"
+    },
+    {
+      "name": "criterios-aceptacion-verificables",
+      "description": "Cada historia incluye criterios testeables y no ambiguos.",
+      "type": "manual_or_programmatic"
+    }
+  ]
+}

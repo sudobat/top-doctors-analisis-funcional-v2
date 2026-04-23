@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+      "passed": true,
+      "evidence": "Sigue la estructura de plantilla: `## Descripcion funcional`, `## Historias funcionales`, `## Requisitos no funcionales`, `## Supuestos, dependencias y riesgos`, `## Fuera de alcance`, `## Dudas abiertas` y `## Checklist de validacion`."
+    },
+    {
+      "text": "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+      "passed": true,
+      "evidence": "Historia 1 explicita `AS-IS` y `TO-BE` en el flujo de notificaciones push, con brecha actual y comportamiento objetivo de deduplicacion."
+    },
+    {
+      "text": "Define reglas anti-duplicado de notificaciones con condiciones verificables.",
+      "passed": true,
+      "evidence": "Define `dedupe_key` deterministica, ventana parametrizable, atomicidad ante concurrencia y resultado `suprimido_por_duplicado` con criterios de aceptacion verificables."
+    },
+    {
+      "text": "Incluye observabilidad concreta (eventos, logs, alertas, metricas).",
+      "passed": true,
+      "evidence": "Incluye eventos (`push_dedupe_checked`, `push_suppressed_duplicate`, etc.), campos de log obligatorios, metricas (`push_duplicate_rate`) y alertas por umbrales."
+    },
+    {
+      "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+      "passed": true,
+      "evidence": "Las 3 historias presentan criterios verificables con estados/resultados concretos (concurrencia, redelivery, trazabilidad, alertas, N reintentos)."
+    },
+    {
+      "text": "Refleja dependencias y riesgos tecnicos asociados a la epic NOTI-88.",
+      "passed": true,
+      "evidence": "Relaciona explicitamente `Epica: NOTI-88`, tickets asociados y riesgos tecnicos (falsos positivos de dedupe, falta de `trace_id`) junto a dependencias de plataforma/data."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

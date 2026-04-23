@@ -1,0 +1,65 @@
+{
+  "skill_name": "td-analista-funcional",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Quiero definir una mejora en el checkout actual. Hoy muchos usuarios abandonan al introducir la direccion. Tenemos flujo web y app. Necesito un analisis funcional detallado para redisenar solo el paso de direccion y validacion postal, manteniendo metodos de pago como estan. Tenemos Figma parcial del nuevo paso y un ticket JIRA COM-2419.",
+      "expected_output": "Documento borrador en espanol con la plantilla exacta, AS-IS y TO-BE detallados, reglas de validacion postal, estados, errores, casos borde, dependencias y dudas abiertas.",
+      "files": [],
+      "assertions": [
+        "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+        "Incluye enfoque de mejora con evidencia AS-IS y TO-BE.",
+        "Describe validaciones de direccion y codigo postal con reglas concretas.",
+        "Cada historia funcional contiene criterios de aceptacion verificables."
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Necesito una funcionalidad nueva: lista de espera para reservas cuando un slot esta completo. Debe servir para web y call center. Tenemos prototipo completo en Figma y una iniciativa llamada RES-WAITLIST-Q3. Quiero bajar a mucho detalle operativo para que desarrollo y QA puedan arrancar.",
+      "expected_output": "Documento borrador en espanol con la plantilla exacta, foco en funcionalidad nueva, uso intensivo de prototipo, historias detalladas, criterios verificables y no funcionales medibles.",
+      "files": [],
+      "assertions": [
+        "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+        "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+        "Integra el prototipo como referencia funcional y de decisiones de flujo.",
+        "Cada historia funcional contiene criterios de aceptacion verificables."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Ayudame con una mejora del panel de administracion de cupones. El problema actual es que no podemos limitar cupones por segmento ni por franja horaria. Hay reglas heredadas y mucha casuistica. No tengo diseno final, solo capturas de pantallas actuales.",
+      "expected_output": "Documento borrador con plantilla exacta y enfoque en mejora: AS-IS, dolores actuales, reglas heredadas, TO-BE detallado, dudas abiertas explicitas por falta de diseno final.",
+      "files": [],
+      "assertions": [
+        "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+        "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+        "Detalla reglas de segmentacion y franja horaria con validaciones y prioridades.",
+        "Distingue claramente limitaciones por ausencia de diseno final en dudas abiertas."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Quiero crear desde cero una funcionalidad de reprogramacion autonoma de citas medicas por parte del paciente. Hay constraints legales de trazabilidad y ventana maxima de 72h antes de la cita. Tenemos un prototipo navegable y varios actores: paciente, soporte y medico.",
+      "expected_output": "Documento borrador con detalle de flujos por rol, permisos, trazabilidad, validaciones temporales, estados y transiciones, manejo de errores y riesgos regulatorios.",
+      "files": [],
+      "assertions": [
+        "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+        "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+        "Detalla permisos y flujos por actor (paciente, soporte y medico).",
+        "Incluye validaciones temporales de ventana de 72h con comportamiento esperado."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Necesitamos refinar una funcionalidad existente de notificaciones push porque actualmente se envian duplicadas. No hay prototipo nuevo, pero si logs y una epic NOTI-88. El analisis debe incluir observabilidad y criterios de aceptacion que QA pueda automatizar.",
+      "expected_output": "Documento borrador de mejora con plantilla exacta, analisis AS-IS/TO-BE, reglas anti-duplicado, eventos de observabilidad, criterios de aceptacion testeables y riesgos/dependencias claros.",
+      "files": [],
+      "assertions": [
+        "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+        "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+        "Define reglas anti-duplicado de notificaciones con condiciones verificables.",
+        "Incluye observabilidad concreta (eventos, logs, alertas, metricas)."
+      ]
+    }
+  ]
+}

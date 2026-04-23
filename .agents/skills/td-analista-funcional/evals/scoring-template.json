@@ -1,0 +1,69 @@
+{
+  "run_id": "eval-0-with_skill",
+  "skill_version": "v0.1",
+  "score_total": 0,
+  "max_score": 24,
+  "criteria": [
+    {
+      "name": "Estructura exacta de plantilla",
+      "score": 0,
+      "evidence": ""
+    },
+    {
+      "name": "Idioma y claridad",
+      "score": 0,
+      "evidence": ""
+    },
+    {
+      "name": "Clasificacion correcta nueva vs mejora",
+      "score": 0,
+      "evidence": ""
+    },
+    {
+      "name": "Uso de contexto previo",
+      "score": 0,
+      "evidence": ""
+    },
+    {
+      "name": "Tratamiento de disenos/prototipos",
+      "score": 0,
+      "evidence": ""
+    },
+    {
+      "name": "Detalle de solucion",
+      "score": 0,
+      "evidence": ""
+    },
+    {
+      "name": "Calidad de historias funcionales",
+      "score": 0,
+      "evidence": ""
+    },
+    {
+      "name": "Criterios de aceptacion verificables",
+      "score": 0,
+      "evidence": ""
+    },
+    {
+      "name": "Cobertura de casos borde y errores",
+      "score": 0,
+      "evidence": ""
+    },
+    {
+      "name": "Requisitos no funcionales medibles",
+      "score": 0,
+      "evidence": ""
+    },
+    {
+      "name": "Supuestos/dependencias/riesgos utiles",
+      "score": 0,
+      "evidence": ""
+    },
+    {
+      "name": "Calidad del borrador para validacion",
+      "score": 0,
+      "evidence": ""
+    }
+  ],
+  "summary": ""
+}

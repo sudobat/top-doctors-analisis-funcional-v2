@@ -1,0 +1,13 @@
+{
+  "eval_id": 3,
+  "eval_name": "reprogramacion-citas",
+  "prompt": "Quiero crear desde cero una funcionalidad de reprogramacion autonoma de citas medicas por parte del paciente. Hay constraints legales de trazabilidad y ventana maxima de 72h antes de la cita. Tenemos un prototipo navegable y varios actores: paciente, soporte y medico.",
+  "assertions": [
+    "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+    "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+    "Detalla permisos y flujos por actor (paciente, soporte y medico).",
+    "Incluye validaciones temporales de ventana de 72h con comportamiento esperado.",
+    "Cubre trazabilidad legal, errores y recuperacion en casos borde.",
+    "Cada historia funcional contiene criterios de aceptacion verificables."
+  ]
+}

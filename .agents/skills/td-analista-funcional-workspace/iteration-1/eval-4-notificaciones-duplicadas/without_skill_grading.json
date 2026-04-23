@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+      "passed": false,
+      "evidence": "El documento usa encabezados numerados (`## 1) Contexto y problema`, `## 2) Objetivo del refinamiento`, etc.) en lugar de la plantilla objetivo."
+    },
+    {
+      "text": "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+      "passed": false,
+      "evidence": "Describe problema y flujo propuesto, pero no presenta comparativa AS-IS/TO-BE explicita con ese encuadre en la salida."
+    },
+    {
+      "text": "Define reglas anti-duplicado de notificaciones con condiciones verificables.",
+      "passed": true,
+      "evidence": "Incluye `dedup_key` deterministica, ventana de deduplicacion, idempotencia por evento, concurrencia entre workers y criterios QA concretos."
+    },
+    {
+      "text": "Incluye observabilidad concreta (eventos, logs, alertas, metricas).",
+      "passed": true,
+      "evidence": "Detalla campos de logging obligatorios, metricas de salud (tasa de duplicados, latencia p95) y alertas operativas."
+    },
+    {
+      "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+      "passed": false,
+      "evidence": "No contiene historias funcionales 1/2/3; presenta criterios de aceptacion globales `CA-01..CA-06`."
+    },
+    {
+      "text": "Refleja dependencias y riesgos tecnicos asociados a la epic NOTI-88.",
+      "passed": true,
+      "evidence": "Referencia explicitamente `NOTI-88` y documenta dependencias con plataforma/infra/QA junto a riesgos tecnicos y mitigaciones."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 3,
+    "total": 6,
+    "pass_rate": 0.5
+  }
+}

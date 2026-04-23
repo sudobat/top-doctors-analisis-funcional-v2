@@ -1,0 +1,13 @@
+{
+  "eval_id": 2,
+  "eval_name": "cupones-segmento-franja",
+  "prompt": "Ayudame con una mejora del panel de administracion de cupones. El problema actual es que no podemos limitar cupones por segmento ni por franja horaria. Hay reglas heredadas y mucha casuistica. No tengo diseno final, solo capturas de pantallas actuales.",
+  "assertions": [
+    "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+    "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+    "Detalla reglas de segmentacion y franja horaria con validaciones y prioridades.",
+    "Cubre casuistica heredada, excepciones y posibles conflictos de reglas.",
+    "Cada historia funcional contiene criterios de aceptacion verificables.",
+    "Distingue claramente limitaciones por ausencia de diseno final en dudas abiertas."
+  ]
+}

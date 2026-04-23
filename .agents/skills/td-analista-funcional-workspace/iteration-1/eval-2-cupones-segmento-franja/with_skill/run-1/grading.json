@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+      "passed": true,
+      "evidence": "Mantiene la estructura esperada con `## Descripcion funcional`, `## Historias funcionales`, `## Requisitos no funcionales`, `## Supuestos, dependencias y riesgos`, `## Fuera de alcance`, `## Dudas abiertas` y `## Checklist de validacion`."
+    },
+    {
+      "text": "Incluye enfoque de mejora con comparativa AS-IS y TO-BE.",
+      "passed": true,
+      "evidence": "En descripcion indica limitaciones actuales del panel (AS-IS) y define mejoras objetivo; ademas en Historia 2 explicita `Orden de evaluacion propuesto` y en Historia 1 compatibilidad hacia atras."
+    },
+    {
+      "text": "Detalla reglas de segmentacion y franja horaria con validaciones y prioridades.",
+      "passed": true,
+      "evidence": "Define selector multivalor, validaciones de lista vacia, no solapes, inicio<fin, codigos de rechazo y prioridad de evaluacion (`reglas heredadas bloqueantes`, luego segmento/franja)."
+    },
+    {
+      "text": "Cubre casuistica heredada, excepciones y posibles conflictos de reglas.",
+      "passed": true,
+      "evidence": "Incluye matriz de precedencia, advertencias por anulacion de reglas nuevas, deprecacion de legacy y riesgos por ambiguedad de reglas heredadas."
+    },
+    {
+      "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+      "passed": true,
+      "evidence": "Las 3 historias incluyen criterios verificables con estados/resultados concretos (codigos `REJECTED`, version de regla, rollback, conflicto de solapes, etc.)."
+    },
+    {
+      "text": "Distingue claramente limitaciones por ausencia de diseno final en dudas abiertas.",
+      "passed": false,
+      "evidence": "Se reconoce en contexto/riesgos que no hay diseño final, pero en `## Dudas abiertas` no se formulan preguntas explicitas sobre esa limitacion de diseño."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 1,
+    "total": 6,
+    "pass_rate": 0.8333
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "La salida usa exactamente los encabezados principales de la plantilla objetivo.",
+      "passed": true,
+      "evidence": "Respeta la plantilla con `## Descripcion funcional`, `## Historias funcionales`, `## Requisitos no funcionales`, `## Supuestos, dependencias y riesgos`, `## Fuera de alcance`, `## Dudas abiertas` y `## Checklist de validacion`."
+    },
+    {
+      "text": "Clasifica correctamente el caso como nueva funcionalidad y adapta el enfoque.",
+      "passed": true,
+      "evidence": "Declara `Tipo: Nueva funcionalidad` y define un diseño desde cero para flujo autonomo, no un simple ajuste incremental."
+    },
+    {
+      "text": "Detalla permisos y flujos por actor (paciente, soporte y medico).",
+      "passed": true,
+      "evidence": "Historia 1 cubre paciente, Historia 2 medico/paciente (sincronizacion/notificaciones) y Historia 3 soporte con permisos `SoporteReprogramaciones` y restricciones de accion."
+    },
+    {
+      "text": "Incluye validaciones temporales de ventana de 72h con comportamiento esperado.",
+      "passed": true,
+      "evidence": "Define regla `mas de 72 horas` y criterio explicito de bloqueo `72 horas o menos`; incluye escenarios de 73h, <=72h y cruce por timeout."
+    },
+    {
+      "text": "Cubre trazabilidad legal, errores y recuperacion en casos borde.",
+      "passed": true,
+      "evidence": "Incluye snapshot legal, campos auditables, estados de incidencia y manejo de colisiones/fallos de agenda/notificaciones con recuperacion controlada."
+    },
+    {
+      "text": "Cada historia funcional contiene criterios de aceptacion verificables.",
+      "passed": true,
+      "evidence": "Las 3 historias traen criterios verificables con condiciones/resultados concretos (`403`, `EscaladoSoporte`, estados de cita, trazabilidad por actor)."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}
