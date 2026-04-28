@@ -674,6 +674,45 @@ Convenciones de esta matriz:
 - `unified_config_consulta_change_blocked`:
   - props: `from_consulta_id`, `to_consulta_id`, `reason` (`unsaved_changes` / `validation_errors`).
 
+## Diagramas de flujo
+
+### Flujo 1 - Happy path de configuracion de consulta
+
+```mermaid
+flowchart TD
+    A([Inicio: doctor entra en Configuracion unificada]) --> B[Selecciona consulta]
+    B --> C[Completa bloque A: Consulta y agendas]
+    C --> D[Completa bloque B: Servicios de la consulta]
+    D --> E[Revisa bloque C: Resumen y validacion final]
+    E --> F[Pulsa Guardar configuracion]
+    F --> G{Validacion global OK?}
+    G -->|Si| H[Persistencia atomica en backend]
+    H --> I[Mostrar toast de exito]
+    I --> J[Estado sin cambios pendientes]
+    J --> K([Fin])
+```
+
+### Flujo 2 - Proceso con errores y recuperacion
+
+```mermaid
+flowchart LR
+    A([Inicio: doctor edita configuracion]) --> B[Guardar configuracion]
+    B --> C{Validacion global OK?}
+    C -->|No| D[Resumen global de errores]
+    D --> E[Doctor abre un error]
+    E --> F[Scroll y foco en campo]
+    F --> G[Corrige campo]
+    G --> H{Quedan errores?}
+    H -->|Si| D
+    H -->|No| I[Reintentar guardado]
+    I --> J{Persistencia backend OK?}
+    C -->|Si| J
+    J -->|No| K[Error recuperable]
+    K --> I
+    J -->|Si| L[Confirmacion de guardado]
+    L --> M([Fin])
+```
+
 ## Requisitos no funcionales
 
 - Rendimiento: tiempo objetivo de guardado final <= 3 segundos en p95 para consulta con configuracion completa; tiempo de validacion previa <= 800 ms en p95.

@@ -1,0 +1,1792 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top Doctors - Prototipo configuracion unificada</title>
+<link rel="stylesheet" href="../.agents/skills/td-design/colors_and_type.css">
+<style>
+  body { margin: 0; }
+  .screen-wrap { background: var(--page-bg); min-height: 100vh; }
+  .top-band {
+    background: #fff;
+    min-height: 64px;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .burger {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid var(--border-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-cyan-dark);
+  }
+  .page-title {
+    margin: 0;
+    flex: 1;
+    text-align: center;
+    font: 700 24px var(--font-sans);
+    color: var(--text-primary);
+  }
+  .content {
+    padding: 20px 24px 36px;
+    max-width: 1240px;
+  }
+  .sticky-head {
+    position: sticky;
+    top: 10px;
+    z-index: 8;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-card);
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+  .head-group { display: flex; flex-direction: column; gap: 4px; min-width: 190px; }
+  .head-label { font: 700 12px var(--font-sans); color: var(--text-primary); }
+  .head-value { font: 600 12px var(--font-sans); color: var(--text-secondary); }
+  .head-grow { flex: 1; }
+  .state-pill {
+    border-radius: 999px;
+    padding: 4px 10px;
+    font: 700 12px var(--font-sans);
+    display: inline-flex;
+  }
+  .state-clean { background: #e9f8ef; color: #1e7f43; }
+  .state-dirty { background: #fff4de; color: #956500; }
+  .state-error { background: #ffe9ec; color: #ab1a31; }
+  .error-card {
+    margin-bottom: 12px;
+    border-radius: 6px;
+    padding: 12px 16px;
+    border: 1px solid #ffd2db;
+    background: #fff0f3;
+  }
+  .error-card h3 { margin: 0 0 8px; font: 700 14px var(--font-sans); color: #ab1a31; }
+  .error-card ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+  .error-link {
+    border: 0;
+    background: transparent;
+    color: #ab1a31;
+    text-decoration: underline;
+    text-align: left;
+    cursor: pointer;
+    padding: 0;
+    font: 600 12px var(--font-sans);
+  }
+  .block {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .block-head {
+    border: 0;
+    width: 100%;
+    text-align: left;
+    background: #fff;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .block-body { padding: 0 18px 16px; display: grid; gap: 16px; }
+  .collapsed .block-body { display: none; }
+  .sub {
+    border-top: 1px dashed var(--border-soft);
+    padding-top: 12px;
+    display: grid;
+    gap: 10px;
+  }
+  .sub:first-child { border-top: 0; padding-top: 0; }
+  .sub h4 { margin: 0; font: 700 14px var(--font-sans); }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font: 700 12px var(--font-sans); color: var(--text-primary); }
+  .readonly {
+    font: 400 14px var(--font-sans);
+    padding: 9px 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    background: #f5f8f9;
+    color: var(--text-secondary);
+  }
+  .help { font: 400 12px var(--font-sans); color: var(--text-secondary); }
+  .field-error { min-height: 14px; font: 600 11px var(--font-sans); color: #ab1a31; }
+  .day-row {
+    background: #fff;
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 125px 96px 96px auto auto auto;
+    align-items: center;
+    gap: 8px;
+  }
+  .service-toolbar { display: grid; gap: 10px; grid-template-columns: 1fr 200px auto; }
+  .service-card {
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    padding: 12px 14px;
+    display: grid;
+    gap: 10px;
+  }
+  .service-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .service-detail {
+    border-top: 1px dashed var(--border-soft);
+    padding-top: 10px;
+    display: none;
+  }
+  .service-card.open .service-detail { display: block; }
+  .service-pending { margin-top: 8px; font: 600 12px var(--font-sans); color: #ab1a31; }
+  .mini-btn {
+    border: 1px solid var(--border-input);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--text-primary);
+    font: 600 12px var(--font-sans);
+    padding: 6px 8px;
+    cursor: pointer;
+  }
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 34, 51, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 40;
+  }
+  .modal-box {
+    width: min(760px, 95vw);
+    max-height: 90vh;
+    overflow: auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: var(--shadow-modal);
+    padding: 16px;
+    display: grid;
+    gap: 12px;
+  }
+  .toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: var(--success);
+    color: #fff;
+    border-radius: 6px;
+    box-shadow: var(--shadow-pop);
+    padding: 9px 12px;
+    font: 700 13px var(--font-sans);
+    z-index: 50;
+  }
+  @media (max-width: 1100px) {
+    .content { padding: 16px; }
+    .grid-2, .grid-3, .grid-4, .service-toolbar { grid-template-columns: 1fr; }
+    .day-row { grid-template-columns: 1fr; }
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="../.agents/skills/td-design/ui_kits/backoffice/Icon.jsx"></script>
+<script type="text/babel" src="../.agents/skills/td-design/ui_kits/backoffice/Layout.jsx"></script>
+<script type="text/babel" src="../.agents/skills/td-design/ui_kits/backoffice/Components.jsx"></script>
+<script type="text/babel">
+  const { useMemo, useState } = React;
+
+  function initialState() {
+    return {
+      consulta: "barcelona",
+      tipoReserva: "",
+      tipoPago: "",
+      mostrarOnline: true,
+      canales: { presencial: true, video: false, mensajeria: false },
+      seguros: [],
+      visitaNinos: false,
+      margenPrimera: 7,
+      margenUltima: 8,
+      citaRecurrente: false,
+      recurrenteNum: "",
+      solapamiento: false,
+      solapeNum: "",
+      rangeConfig: {
+        pacientes: [], citas: [], seguros: [], servicios: [],
+        frecuenciaTipo: "alternas", frecuenciaValor: 2
+      },
+      days: [
+        { id: "lunes", active: true, start: "09:00", end: "13:00", online: true },
+        { id: "martes", active: false, start: "", end: "", online: true },
+        { id: "miercoles", active: false, start: "", end: "", online: true },
+        { id: "jueves", active: false, start: "", end: "", online: true },
+        { id: "viernes", active: false, start: "", end: "", online: true },
+        { id: "sabado", active: false, start: "", end: "", online: true },
+        { id: "domingo", active: false, start: "", end: "", online: true }
+      ],
+      services: [
+        { id: "podologia", nombre: "Primera consulta Podología", active: true, showTop: true, open: false, tratamientos: ["base"], ivaExento: false, iva: 21, canalActivo: true, canalOnline: true, mostrarPrecio: true, durAseg: 30, durPriv: 30, precioConsulta: 90, precioPrepago: 80, nota: "" },
+        { id: "cardio", nombre: "Consulta seguimiento Cardiología", active: true, showTop: false, open: false, tratamientos: ["base"], ivaExento: false, iva: 21, canalActivo: true, canalOnline: true, mostrarPrecio: true, durAseg: "", durPriv: "", precioConsulta: "", precioPrepago: "", nota: "" },
+        { id: "electro", nombre: "Electrocardiograma diagnóstico", active: false, showTop: false, open: false, tratamientos: ["base"], ivaExento: true, iva: "", canalActivo: false, canalOnline: false, mostrarPrecio: false, durAseg: 20, durPriv: 20, precioConsulta: 70, precioPrepago: 65, nota: "" }
+      ]
+    };
+  }
+
+  function serviceIssues(s) {
+    if (!s.active) return [];
+    const out = [];
+    if (!Number(s.durAseg) || Number(s.durAseg) < 5) out.push("Duración asegurados requerida");
+    if (!Number(s.durPriv) || Number(s.durPriv) < 5) out.push("Duración privados requerida");
+    if (!Number(s.precioConsulta) || Number(s.precioConsulta) <= 0) out.push("Precio pago consulta requerido");
+    if (s.precioPrepago === "" || Number(s.precioPrepago) < 0 || Number(s.precioPrepago) > Number(s.precioConsulta || 0)) out.push("Prepago no puede superar pago en consulta");
+    if (!s.ivaExento && (!(Number(s.iva) >= 1 && Number(s.iva) <= 99))) out.push("IVA debe estar entre 1 y 99");
+    return out;
+  }
+
+  function validate(state) {
+    const errors = [];
+    if (!state.tipoReserva) errors.push({ block: "A", target: "a2-tipoReserva", text: "Seleccione tipo de reserva." });
+    if (!state.tipoPago) errors.push({ block: "A", target: "a2-tipoPago", text: "Seleccione tipo de pago." });
+    if (!Object.values(state.canales).some(Boolean)) errors.push({ block: "A", target: "a2-canales", text: "Active al menos un canal de cita." });
+
+    if (!(Number(state.margenPrimera) >= 0 && Number(state.margenPrimera) <= 168)) {
+      errors.push({ block: "A", target: "a4-margenPrimera", text: "Margen primera cita fuera de rango (0..168)." });
+    }
+    if (!(Number(state.margenUltima) >= 1 && Number(state.margenUltima) <= 52)) {
+      errors.push({ block: "A", target: "a4-margenUltima", text: "Margen última cita fuera de rango (1..52)." });
+    }
+    if (state.citaRecurrente && !(Number(state.recurrenteNum) >= 2 && Number(state.recurrenteNum) <= 12)) {
+      errors.push({ block: "A", target: "a4-recurrente", text: "Número de sesiones recurrentes inválido (2..12)." });
+    }
+    if (state.solapamiento && !(Number(state.solapeNum) >= 2 && Number(state.solapeNum) <= 4)) {
+      errors.push({ block: "A", target: "a4-solape", text: "Número de solapamientos inválido (2..4)." });
+    }
+
+    const activeDays = state.days.filter((d) => d.active);
+    if (state.tipoReserva === "calendario" && activeDays.length === 0) {
+      errors.push({ block: "A", target: "a5-days", text: "Debe activar al menos un día con horarios." });
+    }
+    activeDays.forEach((d) => {
+      if (!d.start || !d.end || d.start >= d.end) {
+        errors.push({ block: "A", target: "day-" + d.id, text: "Rango horario inválido en " + d.id + "." });
+      }
+    });
+
+    let serviceIncomplete = 0;
+    let serviceErrorCount = 0;
+    state.services.forEach((s) => {
+      const issues = serviceIssues(s);
+      if (issues.length) {
+        serviceIncomplete += 1;
+        serviceErrorCount += issues.length;
+        errors.push({ block: "B", target: "svc-" + s.id, text: "Servicio incompleto: " + s.nombre + "." });
+      }
+    });
+
+    return {
+      errors,
+      serviceIncomplete,
+      serviceErrorCount,
+      blockAOk: !errors.some((e) => e.block === "A"),
+      blockBOk: !errors.some((e) => e.block === "B")
+    };
+  }
+
+  function UnifiedScreen() {
+    const [data, setData] = useState(initialState);
+    const [savedSnapshot, setSavedSnapshot] = useState(JSON.stringify(initialState()));
+    const [collapsed, setCollapsed] = useState({ A: false, B: false, C: false });
+    const [showRangeModal, setShowRangeModal] = useState(false);
+    const [showToast, setShowToast] = useState(false);
+    const [lastSaved, setLastSaved] = useState("");
+
+    const snapshot = JSON.stringify(data);
+    const hasUnsavedChanges = snapshot !== savedSnapshot;
+    const result = useMemo(() => validate(data), [data]);
+    const hasErrors = result.errors.length > 0;
+    const status = hasErrors ? "Errores pendientes" : (hasUnsavedChanges ? "Con cambios sin guardar" : "Sin cambios");
+    const statusClass = hasErrors ? "state-error" : (hasUnsavedChanges ? "state-dirty" : "state-clean");
+    const blocksDone = [result.blockAOk, result.blockBOk, !hasErrors].filter(Boolean).length;
+
+    function goTo(targetId) {
+      const node = document.getElementById(targetId);
+      if (!node) return;
+      node.scrollIntoView({ behavior: "smooth", block: "center" });
+      const focusable = node.querySelector("input,select,textarea,button");
+      if (focusable) focusable.focus();
+    }
+
+    function updateField(name, value) {
+      setData((prev) => ({ ...prev, [name]: value }));
+    }
+
+    function updateDay(dayId, patch) {
+      setData((prev) => ({
+        ...prev,
+        days: prev.days.map((d) => d.id === dayId ? { ...d, ...patch } : d)
+      }));
+    }
+
+    function updateService(serviceId, patch) {
+      setData((prev) => ({
+        ...prev,
+        services: prev.services.map((s) => s.id === serviceId ? { ...s, ...patch } : s)
+      }));
+    }
+
+    function onChangeConsulta(nextValue) {
+      if (hasUnsavedChanges || hasErrors) {
+        alert("Debe guardar la configuración actual antes de cambiar de consulta.");
+        return;
+      }
+      updateField("consulta", nextValue);
+    }
+
+    function saveAll() {
+      const check = validate(data);
+      if (check.errors.length) return;
+      setSavedSnapshot(JSON.stringify(data));
+      setLastSaved(new Date().toLocaleString("es-ES"));
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2000);
+    }
+
+    function discardChanges() {
+      if (!hasUnsavedChanges) return;
+      if (!window.confirm("Se perderán los cambios no guardados. ¿Desea continuar?")) return;
+      setData(JSON.parse(savedSnapshot));
+    }
+
+    const tipoPacientes = data.seguros.length && !data.seguros.includes("privado") ? "Privados y asegurados" : "Privados";
+
+    return (
+      <div className="screen-wrap">
+        <div className="top-band">
+          <div className="burger"><Icon name="menu" size={20}/></div>
+          <h1 className="page-title">Configuración unificada</h1>
+          <div style={{width:40}}/>
+        </div>
+
+        <div className="content">
+          <InfoBanner>
+            Estimado doctor, esta vista unifica la configuración de consultas, agendas y servicios en una sola pantalla con guardado final único.
+          </InfoBanner>
+
+          <div className="sticky-head">
+            <div className="head-group">
+              <div className="head-label">Selector de consulta</div>
+              <select value={data.consulta} onChange={(e) => onChangeConsulta(e.target.value)}>
+                <option value="barcelona">Consulta Barcelona - Eixample</option>
+                <option value="madrid">Consulta Madrid - Centro</option>
+                <option value="valencia">Consulta Valencia - Turia</option>
+              </select>
+            </div>
+
+            <div className="head-group">
+              <div className="head-label">Estado</div>
+              <span className={"state-pill " + statusClass}>{status}</span>
+            </div>
+
+            <div className="head-group">
+              <div className="head-label">Progreso</div>
+              <div className="head-value">{blocksDone}/3 bloques completos</div>
+            </div>
+
+            <div className="head-grow"/>
+            <PrimaryButton onClick={saveAll} disabled={hasErrors}>Guardar configuración</PrimaryButton>
+          </div>
+
+          {hasErrors && (
+            <div className="error-card">
+              <h3>Errores globales con navegación</h3>
+              <ul>
+                {result.errors.map((err, idx) => (
+                  <li key={idx}><button className="error-link" onClick={() => goTo(err.target)}>{err.text}</button></li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <section className={"block " + (collapsed.A ? "collapsed" : "")}>
+            <button className="block-head" onClick={() => setCollapsed((p) => ({ ...p, A: !p.A }))}>
+              <span className="td-h2" style={{margin:0}}>Bloque A: Consulta y agendas</span>
+              <span className={"state-pill " + (result.blockAOk ? "state-clean" : "state-dirty")}>{result.blockAOk ? "Completo" : "Incompleto"}</span>
+            </button>
+            <div className="block-body">
+              <div className="sub" id="a1">
+                <h4>A1. Identidad de consulta (solo lectura)</h4>
+                <div className="grid-2">
+                  <div className="field"><label>Nombre de consulta</label><div className="readonly">Consulta Barcelona - Eixample</div></div>
+                  <div className="field"><label>Tratamientos asociados</label><div className="readonly">Cardiología, Electrocardiograma</div></div>
+                  <div className="field"><label>Dirección</label><div className="readonly">Carrer de Valencia 119, Barcelona</div></div>
+                  <div className="field"><label>Contacto</label><div className="readonly">+34 932 00 00 00 - consulta@doctor.es</div></div>
+                </div>
+              </div>
+
+              <div className="sub" id="a2">
+                <h4>A2. Configuración operativa base</h4>
+                <div className="grid-3">
+                  <div className="field">
+                    <label>Mostrar online</label>
+                    <Toggle checked={data.mostrarOnline} onChange={(v) => updateField("mostrarOnline", v)}/>
+                  </div>
+                  <div className="field" id="a2-tipoReserva">
+                    <label>Tipo de reserva</label>
+                    <select value={data.tipoReserva} onChange={(e) => updateField("tipoReserva", e.target.value)}>
+                      <option value="">Seleccione...</option>
+                      <option value="calendario">Con calendario</option>
+                      <option value="sin-calendario">Sin calendario</option>
+                    </select>
+                  </div>
+                  <div className="field" id="a2-tipoPago">
+                    <label>Tipo de pago</label>
+                    <select value={data.tipoPago} onChange={(e) => updateField("tipoPago", e.target.value)}>
+                      <option value="">Seleccione...</option>
+                      <option value="consulta">Pago en consulta</option>
+                      <option value="prepago">Prepago</option>
+                      <option value="mixto">Mixto</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="row" id="a2-canales">
+                  <span className="help" style={{fontWeight:700}}>Canales:</span>
+                  <Checkbox checked={data.canales.presencial} onChange={(v) => updateField("canales", { ...data.canales, presencial: v })} label="Presencial"/>
+                  <Checkbox checked={data.canales.video} onChange={(v) => updateField("canales", { ...data.canales, video: v })} label="Videoconsulta"/>
+                  <Checkbox checked={data.canales.mensajeria} onChange={(v) => updateField("canales", { ...data.canales, mensajeria: v })} label="Mensajería"/>
+                </div>
+              </div>
+
+              <div className="sub" id="a3">
+                <h4>A3. Tipología de atención</h4>
+                <div className="grid-3">
+                  <div className="field">
+                    <label>Seguros médicos</label>
+                    <select multiple size="4" value={data.seguros} onChange={(e) => {
+                      const vals = Array.from(e.target.selectedOptions).map((o) => o.value);
+                      updateField("seguros", vals);
+                    }}>
+                      <option value="adeslas">Adeslas</option>
+                      <option value="sanitas">Sanitas</option>
+                      <option value="asisa">Asisa</option>
+                      <option value="privado">Solo privados</option>
+                    </select>
+                  </div>
+                  <div className="field">
+                    <label>Visita niños</label>
+                    <Checkbox checked={data.visitaNinos} onChange={(v) => updateField("visitaNinos", v)} label="Acepta visitas pediátricas"/>
+                  </div>
+                  <div className="field">
+                    <label>Tipo de pacientes resultante</label>
+                    <div className="readonly">{tipoPacientes}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="sub" id="a4">
+                <h4>A4. Reglas de agenda</h4>
+                <div className="grid-4">
+                  <div className="field" id="a4-margenPrimera"><label>Margen primera cita (días)</label><TextInput type="number" value={data.margenPrimera} onChange={(e) => updateField("margenPrimera", e.target.value)}/></div>
+                  <div className="field" id="a4-margenUltima"><label>Margen última cita (semanas)</label><TextInput type="number" value={data.margenUltima} onChange={(e) => updateField("margenUltima", e.target.value)}/></div>
+                  <div className="field" id="a4-recurrente">
+                    <label>Cita recurrente</label>
+                    <div className="row">
+                      <Toggle checked={data.citaRecurrente} onChange={(v) => updateField("citaRecurrente", v)}/>
+                      <TextInput type="number" placeholder="2..12" disabled={!data.citaRecurrente} value={data.recurrenteNum} onChange={(e) => updateField("recurrenteNum", e.target.value)} style={{maxWidth:96}}/>
+                    </div>
+                  </div>
+                  <div className="field" id="a4-solape">
+                    <label>Solapamiento</label>
+                    <div className="row">
+                      <Toggle checked={data.solapamiento} onChange={(v) => updateField("solapamiento", v)}/>
+                      <TextInput type="number" placeholder="2..4" disabled={!data.solapamiento} value={data.solapeNum} onChange={(e) => updateField("solapeNum", e.target.value)} style={{maxWidth:96}}/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="sub" id="a5-days">
+                <h4>A5. Horarios por día</h4>
+                {data.days.map((d) => (
+                  <div className="day-row" key={d.id} id={"day-" + d.id}>
+                    <Checkbox checked={d.active} onChange={(v) => updateDay(d.id, { active: v })} label={d.id[0].toUpperCase() + d.id.slice(1)}/>
+                    <TextInput type="time" value={d.start} onChange={(e) => updateDay(d.id, { start: e.target.value })} disabled={!d.active}/>
+                    <TextInput type="time" value={d.end} onChange={(e) => updateDay(d.id, { end: e.target.value })} disabled={!d.active}/>
+                    <Toggle checked={d.online} onChange={(v) => updateDay(d.id, { online: v })}/>
+                    <button className="mini-btn" onClick={() => setShowRangeModal(true)}>Configurar</button>
+                    <button className="mini-btn" onClick={() => updateDay(d.id, { active: false, start: "", end: "" })}>Eliminar</button>
+                  </div>
+                ))}
+              </div>
+
+              <div className="sub" id="a6">
+                <h4>A6. Configuración avanzada por rango</h4>
+                <div className="row">
+                  <button className="mini-btn" onClick={() => setShowRangeModal(true)}>Abrir panel de rango</button>
+                  <span className="help">Incluye pacientes, tipos de cita, seguros, servicios y frecuencia.</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className={"block " + (collapsed.B ? "collapsed" : "")}>
+            <button className="block-head" onClick={() => setCollapsed((p) => ({ ...p, B: !p.B }))}>
+              <span className="td-h2" style={{margin:0}}>Bloque B: Servicios de la consulta</span>
+              <span className={"state-pill " + (result.blockBOk ? "state-clean" : "state-dirty")}>{result.blockBOk ? "Completo" : "Incompleto"}</span>
+            </button>
+            <div className="block-body">
+              <div className="sub" id="b1">
+                <h4>B1. Filtros y utilidades</h4>
+                <div className="service-toolbar">
+                  <TextInput placeholder="Buscar servicio..." />
+                  <select defaultValue="todos">
+                    <option value="todos">Todos</option>
+                    <option value="activos">Activos</option>
+                    <option value="inactivos">Inactivos</option>
+                    <option value="errores">Con errores</option>
+                  </select>
+                  <div className="help">{data.services.length} resultados</div>
+                </div>
+              </div>
+
+              <div className="sub" id="b2">
+                <h4>B2/B3/B4. Lista, detalle y validación por servicio</h4>
+                {data.services.map((s) => {
+                  const issues = serviceIssues(s);
+                  return (
+                    <div className={"service-card " + (s.open ? "open" : "")} key={s.id} id={"svc-" + s.id}>
+                      <div className="service-head">
+                        <div style={{display:"flex", alignItems:"center", gap:10}}>
+                          <Toggle checked={s.active} onChange={(v) => updateService(s.id, { active: v })}/>
+                          <strong>{s.nombre}</strong>
+                        </div>
+                        <div className="row">
+                          <Checkbox checked={s.showTop} onChange={(v) => updateService(s.id, { showTop: v })} label="Mostrar en Top Doctors"/>
+                          <span className={"state-pill " + (issues.length ? "state-dirty" : "state-clean")}>{s.active ? (issues.length ? "Incompleto" : "Completo") : "No requerido"}</span>
+                          <button className="mini-btn" onClick={() => updateService(s.id, { open: !s.open })}>Configurar</button>
+                        </div>
+                      </div>
+
+                      {!s.active && (
+                        <WarningPill>Este servicio está desactivado. <b style={{color:"var(--text-primary)"}}>Actívelo y configúrelo</b>.</WarningPill>
+                      )}
+
+                      <div className="service-detail">
+                        <div className="grid-3">
+                          <div className="field">
+                            <label>Tratamientos asociados</label>
+                            <select multiple size="3" value={s.tratamientos} onChange={(e) => {
+                              const vals = Array.from(e.target.selectedOptions).map((o) => o.value);
+                              updateService(s.id, { tratamientos: vals });
+                            }}>
+                              <option value="base">Tratamiento base</option>
+                              <option value="avanzado">Tratamiento avanzado</option>
+                              <option value="premium">Tratamiento premium</option>
+                            </select>
+                          </div>
+                          <div className="field">
+                            <label>IVA</label>
+                            <div className="row">
+                              <Checkbox checked={s.ivaExento} onChange={(v) => updateService(s.id, { ivaExento: v, iva: v ? "" : 21 })} label="Exento de IVA"/>
+                              <TextInput type="number" value={s.iva} disabled={s.ivaExento} onChange={(e) => updateService(s.id, { iva: e.target.value })} style={{maxWidth:96}}/>
+                            </div>
+                          </div>
+                          <div className="field">
+                            <label>Consultas disponibles</label>
+                            <div className="readonly">Consulta seleccionada ({data.consulta})</div>
+                          </div>
+                        </div>
+
+                        <div className="grid-4" style={{marginTop:10}}>
+                          <div className="field"><label>Canal activo</label><Toggle checked={s.canalActivo} onChange={(v) => updateService(s.id, { canalActivo: v })}/></div>
+                          <div className="field"><label>Mostrar online</label><Checkbox checked={s.canalOnline} onChange={(v) => updateService(s.id, { canalOnline: v })} label="Canal visible"/></div>
+                          <div className="field"><label>Mostrar precio</label><Checkbox checked={s.mostrarPrecio} onChange={(v) => updateService(s.id, { mostrarPrecio: v })} label="Precio visible"/></div>
+                          <div className="field"><label>Duración asegurados</label><TextInput type="number" value={s.durAseg} onChange={(e) => updateService(s.id, { durAseg: e.target.value })}/></div>
+                          <div className="field"><label>Duración privados</label><TextInput type="number" value={s.durPriv} onChange={(e) => updateService(s.id, { durPriv: e.target.value })}/></div>
+                          <div className="field"><label>Precio pago consulta</label><TextInput type="number" value={s.precioConsulta} onChange={(e) => updateService(s.id, { precioConsulta: e.target.value })}/></div>
+                          <div className="field"><label>Precio prepago</label><TextInput type="number" value={s.precioPrepago} onChange={(e) => updateService(s.id, { precioPrepago: e.target.value })}/></div>
+                          <div className="field"><label>Nota opcional</label><textarea value={s.nota} onChange={(e) => updateService(s.id, { nota: e.target.value })}/></div>
+                        </div>
+
+                        {issues.length > 0 && <div className="service-pending">Pendientes: {issues.join(" | ")}</div>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+          <section className={"block " + (collapsed.C ? "collapsed" : "")}>
+            <button className="block-head" onClick={() => setCollapsed((p) => ({ ...p, C: !p.C }))}>
+              <span className="td-h2" style={{margin:0}}>Bloque C: Resumen y validación final</span>
+              <span className={"state-pill " + (hasErrors ? "state-error" : "state-clean")}>{hasErrors ? "Errores" : "Listo"}</span>
+            </button>
+            <div className="block-body">
+              <div className="sub">
+                <h4>C1. Estado global</h4>
+                <div className="grid-3">
+                  <div className="help">Bloques completos: {blocksDone}/3</div>
+                  <div className="help">Errores pendientes: {result.errors.length}</div>
+                  <div className="help">Servicios incompletos: {result.serviceIncomplete}</div>
+                </div>
+              </div>
+              <div className="sub">
+                <h4>C2. Checklist de validación</h4>
+                <ul className="help" style={{margin:0, paddingLeft:18}}>
+                  <li>Consulta y agendas válidas: {result.blockAOk ? "sí" : "no"}</li>
+                  <li>Horarios válidos y sin solapes no permitidos: {!result.errors.some((e) => e.target.startsWith("day-")) ? "sí" : "no"}</li>
+                  <li>Servicios mínimos requeridos configurados: {result.serviceIncomplete === 0 ? "sí" : "no"}</li>
+                  <li>Reglas de precios/canales consistentes: {result.serviceErrorCount === 0 ? "sí" : "no"}</li>
+                </ul>
+              </div>
+              <div className="sub">
+                <h4>C3. Acciones</h4>
+                <div className="row">
+                  <PrimaryButton onClick={saveAll} disabled={hasErrors}>Guardar configuración</PrimaryButton>
+                  <GhostButton onClick={discardChanges}>Descartar cambios</GhostButton>
+                </div>
+                <div className="help">{lastSaved ? ("Último guardado: " + lastSaved) : "Sin guardados en esta sesión."}</div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {showRangeModal && (
+          <div className="modal" onClick={() => setShowRangeModal(false)}>
+            <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+              <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                <SectionHeading icon="gear">A6. Configuración avanzada por rango</SectionHeading>
+                <button className="mini-btn" onClick={() => setShowRangeModal(false)}>Cerrar</button>
+              </div>
+              <div className="grid-2">
+                <div className="field">
+                  <label>Tipos de pacientes del rango</label>
+                  <select multiple size="4" value={data.rangeConfig.pacientes} onChange={(e) => {
+                    const vals = Array.from(e.target.selectedOptions).map((o) => o.value);
+                    setData((p) => ({ ...p, rangeConfig: { ...p.rangeConfig, pacientes: vals } }));
+                  }}>
+                    <option value="privados">Privados</option>
+                    <option value="asegurados">Asegurados</option>
+                    <option value="infantil">Infantil</option>
+                    <option value="primera">Primera visita</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label>Tipos de cita del rango</label>
+                  <select multiple size="4" value={data.rangeConfig.citas} onChange={(e) => {
+                    const vals = Array.from(e.target.selectedOptions).map((o) => o.value);
+                    setData((p) => ({ ...p, rangeConfig: { ...p.rangeConfig, citas: vals } }));
+                  }}>
+                    <option value="primera">Primera cita</option>
+                    <option value="seguimiento">Seguimiento</option>
+                    <option value="revision">Revisión</option>
+                    <option value="urgencia">Urgencia</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label>Seguros permitidos</label>
+                  <select multiple size="4" value={data.rangeConfig.seguros} onChange={(e) => {
+                    const vals = Array.from(e.target.selectedOptions).map((o) => o.value);
+                    setData((p) => ({ ...p, rangeConfig: { ...p.rangeConfig, seguros: vals } }));
+                  }}>
+                    <option value="adeslas">Adeslas</option>
+                    <option value="sanitas">Sanitas</option>
+                    <option value="asisa">Asisa</option>
+                    <option value="dkv">DKV</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label>Servicios permitidos</label>
+                  <select multiple size="4" value={data.rangeConfig.servicios} onChange={(e) => {
+                    const vals = Array.from(e.target.selectedOptions).map((o) => o.value);
+                    setData((p) => ({ ...p, rangeConfig: { ...p.rangeConfig, servicios: vals } }));
+                  }}>
+                    <option value="podologia">Primera consulta Podología</option>
+                    <option value="cardio">Seguimiento Cardiología</option>
+                    <option value="electro">Electrocardiograma</option>
+                  </select>
+                </div>
+              </div>
+              <div className="grid-2">
+                <div className="field">
+                  <label>Frecuencia</label>
+                  <select value={data.rangeConfig.frecuenciaTipo} onChange={(e) => {
+                    setData((p) => ({ ...p, rangeConfig: { ...p.rangeConfig, frecuenciaTipo: e.target.value } }));
+                  }}>
+                    <option value="alternas">Semanas alternas</option>
+                    <option value="intervalo">Intervalo de semanas</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label>Valor de frecuencia</label>
+                  <TextInput type="number" value={data.rangeConfig.frecuenciaValor} onChange={(e) => {
+                    setData((p) => ({ ...p, rangeConfig: { ...p.rangeConfig, frecuenciaValor: e.target.value } }));
+                  }}/>
+                </div>
+              </div>
+              <PrimaryButton onClick={() => setShowRangeModal(false)}>Guardar configuración de rango</PrimaryButton>
+            </div>
+          </div>
+        )}
+
+        {showToast && <div className="toast">Configuración guardada correctamente.</div>}
+      </div>
+    );
+  }
+
+  function App() {
+    return (
+      <div style={{display:"flex", minHeight:"100vh", background:"var(--page-bg)"}}>
+        <Sidebar activeIdx={2} onSelect={() => {}}/>
+        <main style={{flex:1, minWidth:0}}>
+          <UnifiedScreen/>
+        </main>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top Doctors - Configuracion unificada</title>
+<link rel="stylesheet" href="../.agents/skills/td-design/colors_and_type.css">
+<style>
+  body { margin: 0; background: var(--page-bg); color: var(--text-primary); }
+  .app { min-height: 100vh; display: grid; grid-template-columns: var(--sidebar-width) 1fr; }
+  .sidebar {
+    background: var(--grad-sidebar);
+    padding: var(--space-4) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .side-btn {
+    border: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: #fff;
+    font-weight: var(--fw-bold);
+  }
+  .side-btn.active { background: #fff; color: var(--brand-cyan-dark); }
+
+  .main { min-width: 0; }
+  .page-header {
+    height: var(--header-height);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-h1);
+  }
+  .container { max-width: 1220px; margin: 0 auto; padding: var(--space-5) var(--space-8) var(--space-8); }
+
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    align-items: end;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+  .group { display: flex; flex-direction: column; gap: 4px; min-width: 190px; }
+  .group label { font-size: var(--fs-label); font-weight: var(--fw-bold); }
+  .grow { flex: 1; }
+
+  select, input[type="text"], input[type="number"], input[type="time"], textarea {
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    padding: 8px 10px;
+    font-size: var(--fs-body);
+    color: var(--text-primary);
+    width: 100%;
+  }
+  select:focus, input:focus, textarea:focus {
+    outline: 2px solid var(--brand-cyan-dark);
+    outline-offset: 1px;
+  }
+  textarea { min-height: 64px; resize: vertical; }
+
+  .badge {
+    border-radius: var(--radius-pill);
+    padding: 4px 10px;
+    font-size: var(--fs-small);
+    font-weight: var(--fw-bold);
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+  }
+  .status-clean { background: #e7f8ee; color: #14753b; }
+  .status-dirty { background: #fff3dd; color: #8c6202; }
+  .status-error { background: #ffe8ec; color: #ab1a31; }
+
+  .btn-primary {
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: var(--grad-cta);
+    color: #fff;
+    font-weight: var(--fw-bold);
+    padding: 10px 14px;
+    cursor: pointer;
+  }
+  .btn-primary[disabled] { opacity: 0.5; cursor: not-allowed; }
+  .btn-secondary {
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    color: var(--text-primary);
+    padding: 10px 12px;
+    cursor: pointer;
+  }
+  .btn-xs {
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    color: var(--text-primary);
+    padding: 5px 8px;
+    font-size: var(--fs-small);
+    cursor: pointer;
+  }
+
+  .error-summary {
+    display: none;
+    margin-bottom: var(--space-4);
+    border: 1px solid #ffc7d1;
+    border-radius: var(--radius-md);
+    background: #fff0f3;
+    padding: var(--space-3) var(--space-4);
+  }
+  .error-summary h3 { margin: 0 0 8px; font-size: var(--fs-body); }
+  .error-summary ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+  .error-summary button {
+    border: 0;
+    background: transparent;
+    color: #ab1a31;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    font-size: var(--fs-small);
+  }
+
+  .block {
+    background: #fff;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    margin-bottom: var(--space-4);
+  }
+  .block-head {
+    width: 100%;
+    border: 0;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+    text-align: left;
+    padding: var(--space-4);
+    cursor: pointer;
+  }
+  .block-body { padding: 0 var(--space-4) var(--space-4); display: grid; gap: var(--space-4); }
+  .block.collapsed .block-body { display: none; }
+  .subblock {
+    border-top: 1px dashed var(--border-soft);
+    padding-top: var(--space-3);
+    display: grid;
+    gap: var(--space-3);
+  }
+  .subblock:first-child { border-top: 0; padding-top: 0; }
+  .subblock h4 { margin: 0; font-size: var(--fs-body); }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-3); }
+  .inline { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); }
+  .switch-line { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-small); }
+  .readonly { background: #f4f7f8; color: var(--text-secondary); }
+  .hint { font-size: var(--fs-small); color: var(--text-secondary); }
+  .error-text { font-size: var(--fs-small); color: #ab1a31; min-height: 16px; }
+
+  .range-row {
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    background: #fafcfd;
+    padding: 8px;
+    display: grid;
+    grid-template-columns: 120px 88px 88px auto auto auto;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .service-toolbar { display: grid; grid-template-columns: 1fr 200px auto; gap: var(--space-2); }
+  .service-card {
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+    margin-bottom: var(--space-3);
+    background: #fff;
+  }
+  .service-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+  .service-detail { margin-top: var(--space-3); border-top: 1px dashed var(--border-soft); padding-top: var(--space-3); display: none; }
+  .service-card.open .service-detail { display: block; }
+  .service-card.hidden { display: none; }
+  .mini-pending { font-size: var(--fs-small); color: #ab1a31; }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 34, 51, 0.35);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 40;
+  }
+  .overlay.open { display: flex; }
+  .panel {
+    width: min(760px, 96vw);
+    max-height: 88vh;
+    overflow: auto;
+    background: #fff;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-modal);
+    padding: var(--space-4);
+    display: grid;
+    gap: var(--space-3);
+  }
+  .panel-head { display: flex; justify-content: space-between; align-items: center; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #143626;
+    color: #fff;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    display: none;
+    z-index: 60;
+  }
+
+  @media (max-width: 1120px) {
+    .container { padding: var(--space-4); }
+    .grid-2, .grid-3, .grid-4, .service-toolbar { grid-template-columns: 1fr; }
+    .range-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <button class="side-btn">A</button>
+    <button class="side-btn">P</button>
+    <button class="side-btn active">C</button>
+    <button class="side-btn">M</button>
+    <button class="side-btn">R</button>
+  </aside>
+
+  <main class="main">
+    <header class="page-header">Configuracion unificada de agendas y citas</header>
+    <div class="container">
+      <section class="sticky-header">
+        <div class="group">
+          <label for="consultaSelect">Selector de consulta</label>
+          <select id="consultaSelect">
+            <option value="barcelona">Consulta Barcelona - Eixample</option>
+            <option value="madrid">Consulta Madrid - Centro</option>
+            <option value="valencia">Consulta Valencia - Turia</option>
+          </select>
+        </div>
+        <div>
+          <div class="hint">Estado de formulario</div>
+          <span id="formState" class="badge status-clean">Sin cambios</span>
+        </div>
+        <div>
+          <div class="hint">Indicador de progreso</div>
+          <div id="progressText" class="hint">0/3 bloques completos</div>
+        </div>
+        <div class="grow"></div>
+        <button id="saveTop" class="btn-primary">Guardar configuracion</button>
+      </section>
+
+      <section id="errorSummary" class="error-summary">
+        <h3>Errores pendientes</h3>
+        <ul id="errorList"></ul>
+      </section>
+
+      <section id="blockA" class="block">
+        <button class="block-head" data-toggle="blockA" type="button">
+          <span class="td-h2">Bloque A: Consulta y agendas</span>
+          <span id="statusA" class="badge status-dirty">Incompleto</span>
+        </button>
+        <div class="block-body">
+          <div id="A1" class="subblock">
+            <h4>A1. Identidad de consulta (solo lectura)</h4>
+            <div class="grid-2">
+              <div class="group">
+                <label>Nombre de consulta</label>
+                <input class="readonly" readonly value="Consulta Barcelona - Eixample">
+              </div>
+              <div class="group">
+                <label>Tratamientos asociados</label>
+                <input class="readonly" readonly value="Cardiologia, Electrocardiograma, Revision">
+              </div>
+              <div class="group">
+                <label>Direccion</label>
+                <input class="readonly" readonly value="Carrer de Valencia 119, Barcelona">
+              </div>
+              <div class="group">
+                <label>Telefono y email</label>
+                <input class="readonly" readonly value="+34 932 00 00 00 - consulta@doctor.es">
+              </div>
+            </div>
+            <span class="badge status-clean">Consulta principal</span>
+          </div>
+
+          <div id="A2" class="subblock">
+            <h4>A2. Configuracion operativa base</h4>
+            <div class="grid-3">
+              <div class="group">
+                <label class="switch-line"><input data-track data-key="mostrar-online" type="checkbox" checked> Mostrar online</label>
+              </div>
+              <div class="group">
+                <label for="tipoReserva">Tipo de reserva</label>
+                <select id="tipoReserva" data-track data-required data-label="Tipo de reserva">
+                  <option value="">Seleccione...</option>
+                  <option value="calendario">Con calendario</option>
+                  <option value="sin-calendario">Sin calendario</option>
+                </select>
+                <div class="error-text" data-error-for="tipoReserva"></div>
+              </div>
+              <div class="group">
+                <label for="tipoPago">Tipo de pago</label>
+                <select id="tipoPago" data-track data-required data-label="Tipo de pago">
+                  <option value="">Seleccione...</option>
+                  <option value="consulta">Pago en consulta</option>
+                  <option value="prepago">Prepago</option>
+                  <option value="mixto">Mixto</option>
+                </select>
+                <div class="error-text" data-error-for="tipoPago"></div>
+              </div>
+            </div>
+            <div class="inline">
+              <span class="hint">Canales:</span>
+              <label class="switch-line"><input data-track data-channel type="checkbox" checked> Presencial</label>
+              <label class="switch-line"><input data-track data-channel type="checkbox"> Videoconsulta</label>
+              <label class="switch-line"><input data-track data-channel type="checkbox"> Mensajeria</label>
+            </div>
+            <div class="error-text" data-error-for="canales"></div>
+          </div>
+
+          <div id="A3" class="subblock">
+            <h4>A3. Tipologia de atencion</h4>
+            <div class="grid-3">
+              <div class="group">
+                <label for="seguros">Seguros medicos</label>
+                <select id="seguros" data-track multiple size="4">
+                  <option value="adeslas">Adeslas</option>
+                  <option value="sanitas">Sanitas</option>
+                  <option value="asisa">Asisa</option>
+                  <option value="privado">Solo privados</option>
+                </select>
+              </div>
+              <div class="group">
+                <label class="switch-line"><input id="visitaNinos" data-track type="checkbox"> Visita de ninos</label>
+              </div>
+              <div class="group">
+                <label>Tipo de pacientes resultante</label>
+                <input id="tipoPacientesResultante" class="readonly" readonly value="Privados">
+              </div>
+            </div>
+          </div>
+
+          <div id="A4" class="subblock">
+            <h4>A4. Reglas de agenda</h4>
+            <div class="grid-4">
+              <div class="group">
+                <label for="margenPrimera">Margen primera cita (dias)</label>
+                <input id="margenPrimera" data-track data-required data-label="Margen primera cita" type="number" min="0" max="168" value="7">
+                <div class="error-text" data-error-for="margenPrimera"></div>
+              </div>
+              <div class="group">
+                <label for="margenUltima">Margen ultima cita (semanas)</label>
+                <input id="margenUltima" data-track data-required data-label="Margen ultima cita" type="number" min="1" max="52" value="10">
+                <div class="error-text" data-error-for="margenUltima"></div>
+              </div>
+              <div class="group">
+                <label class="switch-line"><input id="citaRecurrente" data-track type="checkbox"> Cita recurrente</label>
+                <input id="recurrenteNum" data-track type="number" min="2" max="12" placeholder="2..12" disabled>
+                <div class="error-text" data-error-for="recurrenteNum"></div>
+              </div>
+              <div class="group">
+                <label class="switch-line"><input id="solapamiento" data-track type="checkbox"> Permitir solapamiento</label>
+                <input id="solapeNum" data-track type="number" min="2" max="4" placeholder="2..4" disabled>
+                <div class="error-text" data-error-for="solapeNum"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="A5" class="subblock">
+            <h4>A5. Horarios por dia</h4>
+            <div class="hint">Cada dia activo debe tener al menos un rango valido.</div>
+            <div id="scheduleRows"></div>
+            <div class="error-text" data-error-for="horarios"></div>
+          </div>
+
+          <div id="A6" class="subblock">
+            <h4>A6. Configuracion avanzada por rango</h4>
+            <div class="hint">Use "Configurar" en un rango para abrir panel de detalle.</div>
+            <button id="openRangePanelDirect" class="btn-secondary" type="button">Abrir panel avanzado</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="blockB" class="block">
+        <button class="block-head" data-toggle="blockB" type="button">
+          <span class="td-h2">Bloque B: Servicios de la consulta</span>
+          <span id="statusB" class="badge status-dirty">Incompleto</span>
+        </button>
+        <div class="block-body">
+          <div id="B1" class="subblock">
+            <h4>B1. Filtros y utilidades</h4>
+            <div class="service-toolbar">
+              <input id="serviceSearch" type="text" placeholder="Buscar servicio...">
+              <select id="serviceFilter">
+                <option value="todos">Todos</option>
+                <option value="activos">Activos</option>
+                <option value="inactivos">Inactivos</option>
+                <option value="errores">Con errores</option>
+              </select>
+              <div id="serviceCount" class="hint">0 resultados</div>
+            </div>
+          </div>
+
+          <div id="B2" class="subblock">
+            <h4>B2/B3/B4. Lista y detalle de servicios</h4>
+            <div id="serviceList"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="blockC" class="block">
+        <button class="block-head" data-toggle="blockC" type="button">
+          <span class="td-h2">Bloque C: Resumen y validacion final</span>
+          <span id="statusC" class="badge status-dirty">Pendiente</span>
+        </button>
+        <div class="block-body">
+          <div id="C1" class="subblock">
+            <h4>C1. Estado global</h4>
+            <div class="grid-3">
+              <div class="hint" id="metricBlocks">Bloques completos: 0/3</div>
+              <div class="hint" id="metricErrors">Errores pendientes: 0</div>
+              <div class="hint" id="metricServices">Servicios incompletos: 0</div>
+            </div>
+          </div>
+
+          <div id="C2" class="subblock">
+            <h4>C2. Checklist de validacion</h4>
+            <ul id="checklist" class="hint" style="margin:0; padding-left:20px;">
+              <li id="checkA">Consulta y agendas: pendiente</li>
+              <li id="checkHorarios">Horarios: pendiente</li>
+              <li id="checkServicios">Servicios minimos: pendiente</li>
+              <li id="checkPrecios">Reglas precios/canales: pendiente</li>
+            </ul>
+          </div>
+
+          <div id="C3" class="subblock">
+            <h4>C3. Acciones</h4>
+            <div class="inline">
+              <button id="saveBottom" class="btn-primary">Guardar configuracion</button>
+              <button id="discardBtn" class="btn-secondary">Descartar cambios</button>
+            </div>
+            <div id="lastSaved" class="hint">Sin guardado en esta sesion.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div id="rangeOverlay" class="overlay" role="dialog" aria-modal="true">
+  <div class="panel">
+    <div class="panel-head">
+      <strong>Configuracion avanzada del rango</strong>
+      <button id="closeRangePanel" class="btn-secondary" type="button">Cerrar</button>
+    </div>
+    <div class="grid-2">
+      <div class="group">
+        <label>Tipos de pacientes del rango</label>
+        <select id="rangePacientes" data-track multiple size="4">
+          <option value="privado">Privados</option>
+          <option value="asegurado">Asegurados</option>
+          <option value="infantil">Infantil</option>
+          <option value="primera-visita">Primera visita</option>
+        </select>
+      </div>
+      <div class="group">
+        <label>Tipos de cita del rango</label>
+        <select id="rangeCitas" data-track multiple size="4">
+          <option value="primera">Primera cita</option>
+          <option value="seguimiento">Seguimiento</option>
+          <option value="revision">Revision</option>
+          <option value="urgencia">Urgencia</option>
+        </select>
+      </div>
+      <div class="group">
+        <label>Seguros permitidos</label>
+        <select id="rangeSeguros" data-track multiple size="4">
+          <option value="adeslas">Adeslas</option>
+          <option value="sanitas">Sanitas</option>
+          <option value="asisa">Asisa</option>
+          <option value="dkv">DKV</option>
+        </select>
+      </div>
+      <div class="group">
+        <label>Servicios permitidos</label>
+        <select id="rangeServicios" data-track multiple size="4">
+          <option value="podologia">Primera consulta Podologia</option>
+          <option value="seguimiento">Seguimiento Cardiologia</option>
+          <option value="electro">Electrocardiograma</option>
+          <option value="eco">Ecocardiograma</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="group">
+        <label for="frecuenciaTipo">Frecuencia</label>
+        <select id="frecuenciaTipo" data-track>
+          <option value="alternas">Semanas alternas</option>
+          <option value="intervalo">Intervalo de semanas</option>
+        </select>
+      </div>
+      <div class="group">
+        <label for="frecuenciaValor">Intervalo (si aplica)</label>
+        <input id="frecuenciaValor" data-track type="number" min="2" max="8" value="2">
+      </div>
+    </div>
+    <div class="inline">
+      <button id="saveRangePanel" class="btn-primary" type="button">Guardar configuracion de rango</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast">Configuracion guardada correctamente.</div>
+
+<script>
+  const dayNames = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"];
+  const scheduleRows = document.getElementById("scheduleRows");
+  const serviceList = document.getElementById("serviceList");
+
+  const services = [
+    { id: "podologia", nombre: "Primera consulta Podologia", activo: true, mostrar: true, durAseg: 30, durPriv: 30, precioConsulta: 90, precioPrepago: 80, ivaExento: false, iva: 21, nota: "" },
+    { id: "cardio", nombre: "Seguimiento Cardiologia", activo: true, mostrar: false, durAseg: 0, durPriv: 0, precioConsulta: 0, precioPrepago: 0, ivaExento: false, iva: 21, nota: "" },
+    { id: "electro", nombre: "Electrocardiograma diagnostico", activo: false, mostrar: false, durAseg: 20, durPriv: 20, precioConsulta: 70, precioPrepago: 65, ivaExento: true, iva: 0, nota: "" }
+  ];
+
+  let hasUnsavedChanges = false;
+  let lastSnapshot = "";
+  let activeRangeContext = "lunes-rango-1";
+  let currentConsulta = document.getElementById("consultaSelect").value;
+
+  function el(id) { return document.getElementById(id); }
+
+  function createScheduleRows() {
+    scheduleRows.innerHTML = "";
+    dayNames.forEach((day, idx) => {
+      const row = document.createElement("div");
+      row.className = "range-row";
+      row.dataset.day = day;
+      row.innerHTML = [
+        '<label class="switch-line"><input data-track data-key="' + day + '-active" class="day-active" type="checkbox" ' + (idx < 2 ? "checked" : "") + '> ' + capitalize(day) + "</label>",
+        '<input data-track data-key="' + day + '-start" class="day-start" type="time" value="' + (idx < 2 ? "09:00" : "") + '">',
+        '<input data-track data-key="' + day + '-end" class="day-end" type="time" value="' + (idx < 2 ? "13:00" : "") + '">',
+        '<label class="switch-line"><input data-track data-key="' + day + '-online" class="day-online" type="checkbox" checked> Mostrar online</label>',
+        '<button class="btn-xs cfg-range" data-range="' + day + '-rango-1" type="button">Configurar</button>',
+        '<button class="btn-xs remove-range" type="button">Eliminar</button>'
+      ].join("");
+      scheduleRows.appendChild(row);
+    });
+  }
+
+  function renderServices() {
+    serviceList.innerHTML = "";
+    services.forEach((service) => {
+      const card = document.createElement("div");
+      card.className = "service-card";
+      card.dataset.service = service.id;
+      card.innerHTML = [
+        '<div class="service-head">',
+        '  <strong>' + service.nombre + "</strong>",
+        '  <div class="inline">',
+        '    <label class="switch-line"><input class="svc-active" data-track type="checkbox" ' + (service.activo ? "checked" : "") + '> Activo</label>',
+        '    <label class="switch-line"><input class="svc-show" data-track type="checkbox" ' + (service.mostrar ? "checked" : "") + '> Mostrar en Top Doctors</label>',
+        '    <span class="badge status-dirty svc-badge">Incompleto</span>',
+        '    <button type="button" class="btn-xs svc-config">Configurar</button>',
+        "  </div>",
+        "</div>",
+        '<div class="service-detail">',
+        '  <div class="grid-3">',
+        '    <div class="group">',
+        "      <label>Tratamientos asociados</label>",
+        '      <select class="svc-tratamientos" data-track multiple size="3">',
+        '        <option value="trat1" selected>Tratamiento base</option>',
+        '        <option value="trat2">Tratamiento avanzado</option>',
+        '        <option value="trat3">Tratamiento premium</option>',
+        "      </select>",
+        "    </div>",
+        '    <div class="group">',
+        '      <label class="switch-line"><input class="svc-iva-exento" data-track type="checkbox" ' + (service.ivaExento ? "checked" : "") + '> Exento de IVA</label>',
+        '      <input class="svc-iva" data-track type="number" min="1" max="99" value="' + (service.iva || "") + '"' + (service.ivaExento ? " disabled" : "") + '>',
+        "    </div>",
+        '    <div class="group">',
+        "      <label>Consultas disponibles</label>",
+        '      <input class="readonly" readonly value="Consulta seleccionada: activa">',
+        "    </div>",
+        "  </div>",
+        '  <div class="grid-4">',
+        '    <div class="group"><label class="switch-line"><input class="svc-canal" data-track type="checkbox" checked> Canal presencial activo</label></div>',
+        '    <div class="group"><label class="switch-line"><input class="svc-online" data-track type="checkbox" checked> Mostrar online</label></div>',
+        '    <div class="group"><label class="switch-line"><input class="svc-show-price" data-track type="checkbox" checked> Mostrar precio</label></div>',
+        '    <div class="group"><label>Duracion asegurados</label><input class="svc-dur-aseg" data-track type="number" min="5" value="' + (service.durAseg || "") + '"></div>',
+        '    <div class="group"><label>Duracion privados</label><input class="svc-dur-priv" data-track type="number" min="5" value="' + (service.durPriv || "") + '"></div>',
+        '    <div class="group"><label>Precio pago consulta</label><input class="svc-precio-consulta" data-track type="number" min="0" value="' + (service.precioConsulta || "") + '"></div>',
+        '    <div class="group"><label>Precio prepago</label><input class="svc-precio-prepago" data-track type="number" min="0" value="' + (service.precioPrepago || "") + '"></div>',
+        '    <div class="group"><label>Nota opcional</label><textarea class="svc-nota" data-track>' + service.nota + "</textarea></div>",
+        "  </div>",
+        '  <div class="mini-pending svc-pending"></div>',
+        "</div>"
+      ].join("");
+      serviceList.appendChild(card);
+    });
+  }
+
+  function capitalize(text) { return text.charAt(0).toUpperCase() + text.slice(1); }
+
+  function setDirty() {
+    hasUnsavedChanges = snapshot() !== lastSnapshot;
+    updateAll();
+  }
+
+  function snapshot() {
+    const values = {};
+    document.querySelectorAll("[data-track]").forEach((node, idx) => {
+      const key = node.dataset.key || node.id || node.name || "k" + idx;
+      values[key] = node.type === "checkbox" ? node.checked : node.value;
+    });
+    return JSON.stringify(values);
+  }
+
+  function setBadge(node, cls, text) {
+    node.className = "badge " + cls;
+    node.textContent = text;
+  }
+
+  function clearFieldErrors() {
+    document.querySelectorAll(".error-text").forEach((n) => { n.textContent = ""; });
+  }
+
+  function addFieldError(fieldId, message) {
+    const target = document.querySelector('[data-error-for="' + fieldId + '"]');
+    if (target) target.textContent = message;
+  }
+
+  function serviceValidation(card) {
+    const active = card.querySelector(".svc-active").checked;
+    const issues = [];
+    if (!active) return issues;
+    const durAseg = Number(card.querySelector(".svc-dur-aseg").value || 0);
+    const durPriv = Number(card.querySelector(".svc-dur-priv").value || 0);
+    const precioConsulta = Number(card.querySelector(".svc-precio-consulta").value || 0);
+    const precioPrepago = Number(card.querySelector(".svc-precio-prepago").value || 0);
+    const ivaExento = card.querySelector(".svc-iva-exento").checked;
+    const iva = Number(card.querySelector(".svc-iva").value || 0);
+    if (durAseg < 5) issues.push("Duracion asegurados requerida");
+    if (durPriv < 5) issues.push("Duracion privados requerida");
+    if (precioConsulta <= 0) issues.push("Precio pago consulta requerido");
+    if (precioPrepago < 0 || precioPrepago > precioConsulta) issues.push("Prepago invalido");
+    if (!ivaExento && (iva < 1 || iva > 99)) issues.push("IVA fuera de rango");
+    return issues;
+  }
+
+  function validate() {
+    clearFieldErrors();
+    const errors = [];
+
+    const requiredSelects = ["tipoReserva", "tipoPago"];
+    requiredSelects.forEach((id) => {
+      if (!el(id).value) {
+        errors.push({ block: "A", target: id, label: "Complete " + (id === "tipoReserva" ? "tipo de reserva" : "tipo de pago") });
+        addFieldError(id, "Campo obligatorio.");
+      }
+    });
+
+    if (document.querySelectorAll("[data-channel]:checked").length === 0) {
+      errors.push({ block: "A", target: "A2", label: "Active al menos un canal de cita" });
+      addFieldError("canales", "Debe activar al menos un canal.");
+    }
+
+    const mp = Number(el("margenPrimera").value);
+    const mu = Number(el("margenUltima").value);
+    if (!(mp >= 0 && mp <= 168)) {
+      errors.push({ block: "A", target: "margenPrimera", label: "Margen primera cita fuera de rango" });
+      addFieldError("margenPrimera", "Rango permitido: 0..168.");
+    }
+    if (!(mu >= 1 && mu <= 52)) {
+      errors.push({ block: "A", target: "margenUltima", label: "Margen ultima cita fuera de rango" });
+      addFieldError("margenUltima", "Rango permitido: 1..52.");
+    }
+
+    if (el("citaRecurrente").checked) {
+      const n = Number(el("recurrenteNum").value);
+      if (!(n >= 2 && n <= 12)) {
+        errors.push({ block: "A", target: "recurrenteNum", label: "Numero de sesiones recurrentes invalido" });
+        addFieldError("recurrenteNum", "Rango permitido: 2..12.");
+      }
+    }
+    if (el("solapamiento").checked) {
+      const n = Number(el("solapeNum").value);
+      if (!(n >= 2 && n <= 4)) {
+        errors.push({ block: "A", target: "solapeNum", label: "Numero de solapamientos invalido" });
+        addFieldError("solapeNum", "Rango permitido: 2..4.");
+      }
+    }
+
+    let activeDays = 0;
+    document.querySelectorAll(".range-row").forEach((row) => {
+      const day = row.dataset.day;
+      const active = row.querySelector(".day-active").checked;
+      const start = row.querySelector(".day-start").value;
+      const end = row.querySelector(".day-end").value;
+      if (active) {
+        activeDays += 1;
+        if (!start || !end || start >= end) {
+          errors.push({ block: "A", target: "A5", label: "Rango horario invalido en " + capitalize(day) });
+        }
+      }
+    });
+    if (el("tipoReserva").value === "calendario" && activeDays === 0) {
+      errors.push({ block: "A", target: "A5", label: "Debe activar al menos un dia con horarios" });
+    }
+    if (errors.some((e) => e.target === "A5")) {
+      addFieldError("horarios", "Revise dias activos y rango inicio/fin.");
+    }
+
+    let serviceErrors = 0;
+    let serviceIncomplete = 0;
+    document.querySelectorAll(".service-card").forEach((card) => {
+      const issues = serviceValidation(card);
+      const badge = card.querySelector(".svc-badge");
+      const pending = card.querySelector(".svc-pending");
+      if (!card.querySelector(".svc-active").checked) {
+        setBadge(badge, "status-clean", "No requerido");
+        pending.textContent = "";
+        return;
+      }
+      if (issues.length) {
+        serviceErrors += issues.length;
+        serviceIncomplete += 1;
+        setBadge(badge, "status-dirty", "Incompleto");
+        pending.textContent = "Pendientes: " + issues.join(" | ");
+        errors.push({ block: "B", target: card.dataset.service, label: "Servicio incompleto: " + card.querySelector("strong").textContent });
+      } else {
+        setBadge(badge, "status-clean", "Completo");
+        pending.textContent = "";
+      }
+    });
+
+    return { errors, serviceErrors, serviceIncomplete };
+  }
+
+  function updateErrorSummary(errors) {
+    const wrap = el("errorSummary");
+    const list = el("errorList");
+    list.innerHTML = "";
+    if (!errors.length) {
+      wrap.style.display = "none";
+      return;
+    }
+    wrap.style.display = "block";
+    errors.forEach((item) => {
+      const li = document.createElement("li");
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = item.label;
+      btn.addEventListener("click", () => {
+        let target = el(item.target) || document.querySelector('[data-service="' + item.target + '"]');
+        if (!target) target = el(item.target && item.target.startsWith("A") ? item.target : "A2");
+        if (target) {
+          if (target.classList.contains("service-card")) target.classList.add("open");
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+          const f = target.querySelector("input,select,textarea,button");
+          if (f) f.focus();
+        }
+      });
+      li.appendChild(btn);
+      list.appendChild(li);
+    });
+  }
+
+  function updateProgress(validation) {
+    const blockAOk = !validation.errors.some((e) => e.block === "A");
+    const blockBOk = !validation.errors.some((e) => e.block === "B");
+    const blockCOk = validation.errors.length === 0;
+    const done = [blockAOk, blockBOk, blockCOk].filter(Boolean).length;
+
+    el("progressText").textContent = done + "/3 bloques completos";
+    setBadge(el("statusA"), blockAOk ? "status-clean" : "status-dirty", blockAOk ? "Completo" : "Incompleto");
+    setBadge(el("statusB"), blockBOk ? "status-clean" : "status-dirty", blockBOk ? "Completo" : "Incompleto");
+    setBadge(el("statusC"), blockCOk ? "status-clean" : "status-error", blockCOk ? "Listo" : "Errores");
+
+    el("metricBlocks").textContent = "Bloques completos: " + done + "/3";
+    el("metricErrors").textContent = "Errores pendientes: " + validation.errors.length;
+    el("metricServices").textContent = "Servicios incompletos: " + validation.serviceIncomplete;
+
+    el("checkA").textContent = "Consulta y agendas: " + (blockAOk ? "valida" : "pendiente");
+    el("checkHorarios").textContent = "Horarios validos: " + (!validation.errors.some((e) => e.target === "A5") ? "si" : "no");
+    el("checkServicios").textContent = "Servicios minimos configurados: " + (validation.serviceIncomplete === 0 ? "si" : "no");
+    el("checkPrecios").textContent = "Reglas precios/canales consistentes: " + (validation.serviceErrors === 0 ? "si" : "no");
+
+    const saveDisabled = validation.errors.length > 0;
+    el("saveTop").disabled = saveDisabled;
+    el("saveBottom").disabled = saveDisabled;
+  }
+
+  function updateFormState(validation) {
+    const state = el("formState");
+    if (validation.errors.length > 0) {
+      setBadge(state, "status-error", "Errores pendientes");
+    } else if (hasUnsavedChanges) {
+      setBadge(state, "status-dirty", "Con cambios sin guardar");
+    } else {
+      setBadge(state, "status-clean", "Sin cambios");
+    }
+  }
+
+  function updateTipoPacientesResultante() {
+    const select = el("seguros");
+    const selected = Array.from(select.selectedOptions).map((o) => o.value);
+    const hasPrivadoOnly = selected.length === 1 && selected[0] === "privado";
+    if (!selected.length || hasPrivadoOnly) {
+      el("tipoPacientesResultante").value = "Privados";
+    } else {
+      el("tipoPacientesResultante").value = "Privados y asegurados";
+    }
+  }
+
+  function updateAll() {
+    const validation = validate();
+    updateErrorSummary(validation.errors);
+    updateProgress(validation);
+    updateFormState(validation);
+  }
+
+  function saveAll() {
+    const validation = validate();
+    updateErrorSummary(validation.errors);
+    updateProgress(validation);
+    updateFormState(validation);
+    if (validation.errors.length) {
+      el("errorSummary").scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    hasUnsavedChanges = false;
+    lastSnapshot = snapshot();
+    updateAll();
+    el("lastSaved").textContent = "Ultimo guardado: " + new Date().toLocaleString("es-ES");
+    const toast = el("toast");
+    toast.style.display = "block";
+    setTimeout(() => { toast.style.display = "none"; }, 2200);
+  }
+
+  function discardAll() {
+    if (!hasUnsavedChanges) return;
+    const ok = window.confirm("Se perderan los cambios no guardados. Desea continuar?");
+    if (!ok) return;
+    window.location.reload();
+  }
+
+  function toggleDependentInputs() {
+    el("recurrenteNum").disabled = !el("citaRecurrente").checked;
+    el("solapeNum").disabled = !el("solapamiento").checked;
+    document.querySelectorAll(".service-card").forEach((card) => {
+      const ivaExento = card.querySelector(".svc-iva-exento").checked;
+      const ivaInput = card.querySelector(".svc-iva");
+      ivaInput.disabled = ivaExento;
+      if (ivaExento) ivaInput.value = "";
+    });
+  }
+
+  function applyServiceFilter() {
+    const query = el("serviceSearch").value.trim().toLowerCase();
+    const filter = el("serviceFilter").value;
+    let count = 0;
+    document.querySelectorAll(".service-card").forEach((card) => {
+      const name = card.querySelector("strong").textContent.toLowerCase();
+      const active = card.querySelector(".svc-active").checked;
+      const hasIssues = serviceValidation(card).length > 0;
+      let visible = !query || name.includes(query);
+      if (filter === "activos") visible = visible && active;
+      if (filter === "inactivos") visible = visible && !active;
+      if (filter === "errores") visible = visible && hasIssues;
+      card.classList.toggle("hidden", !visible);
+      if (visible) count += 1;
+    });
+    el("serviceCount").textContent = count + " resultados";
+  }
+
+  function bindEvents() {
+    document.querySelectorAll("[data-toggle]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        el(btn.dataset.toggle).classList.toggle("collapsed");
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      const btn = event.target.closest(".svc-config");
+      if (btn) {
+        btn.closest(".service-card").classList.toggle("open");
+      }
+      const cfg = event.target.closest(".cfg-range");
+      if (cfg) {
+        activeRangeContext = cfg.dataset.range;
+        el("rangeOverlay").classList.add("open");
+      }
+      const remove = event.target.closest(".remove-range");
+      if (remove) {
+        const row = remove.closest(".range-row");
+        row.querySelector(".day-active").checked = false;
+        row.querySelector(".day-start").value = "";
+        row.querySelector(".day-end").value = "";
+        setDirty();
+      }
+    });
+
+    el("saveTop").addEventListener("click", saveAll);
+    el("saveBottom").addEventListener("click", saveAll);
+    el("discardBtn").addEventListener("click", discardAll);
+
+    el("openRangePanelDirect").addEventListener("click", () => {
+      activeRangeContext = "manual-open";
+      el("rangeOverlay").classList.add("open");
+    });
+    el("closeRangePanel").addEventListener("click", () => {
+      el("rangeOverlay").classList.remove("open");
+    });
+    el("saveRangePanel").addEventListener("click", () => {
+      el("rangeOverlay").classList.remove("open");
+      hasUnsavedChanges = true;
+      updateAll();
+    });
+    el("rangeOverlay").addEventListener("click", (event) => {
+      if (event.target.id === "rangeOverlay") {
+        el("rangeOverlay").classList.remove("open");
+      }
+    });
+
+    el("serviceSearch").addEventListener("input", applyServiceFilter);
+    el("serviceFilter").addEventListener("change", applyServiceFilter);
+
+    el("citaRecurrente").addEventListener("change", () => {
+      toggleDependentInputs();
+      setDirty();
+    });
+    el("solapamiento").addEventListener("change", () => {
+      toggleDependentInputs();
+      setDirty();
+    });
+    el("seguros").addEventListener("change", () => {
+      updateTipoPacientesResultante();
+      setDirty();
+    });
+
+    document.addEventListener("change", (event) => {
+      if (event.target.matches("[data-track]")) {
+        toggleDependentInputs();
+        setDirty();
+        applyServiceFilter();
+      }
+      if (event.target.matches(".svc-active")) {
+        event.target.closest(".service-card").classList.add("open");
+      }
+    });
+    document.addEventListener("input", (event) => {
+      if (event.target.matches("[data-track]")) {
+        setDirty();
+      }
+    });
+
+    const consultaSelect = el("consultaSelect");
+    consultaSelect.addEventListener("focus", () => { currentConsulta = consultaSelect.value; });
+    consultaSelect.addEventListener("change", () => {
+      const validation = validate();
+      if (hasUnsavedChanges || validation.errors.length > 0) {
+        alert("Debe guardar la configuracion actual antes de cambiar de consulta.");
+        consultaSelect.value = currentConsulta;
+        return;
+      }
+      currentConsulta = consultaSelect.value;
+    });
+
+    window.addEventListener("beforeunload", (event) => {
+      if (!hasUnsavedChanges) return;
+      event.preventDefault();
+      event.returnValue = "";
+    });
+  }
+
+  createScheduleRows();
+  renderServices();
+  bindEvents();
+  updateTipoPacientesResultante();
+  toggleDependentInputs();
+  applyServiceFilter();
+  lastSnapshot = snapshot();
+  updateAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+/* =================================================================
+   Top Doctors Backoffice — Design Tokens
+   Reconstructed from screenshots. Import this file as the foundation
+   for any Top Doctors-branded surface.
+   ================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+:root {
+  /* -------- Brand palette -------- */
+  --brand-cyan: #1abadf;             /* sidebar mid */
+  --brand-cyan-dark: #009ee2;        /* sidebar left edge, primary accent */
+  --brand-cyan-light: #2ccdde;       /* sidebar right edge */
+  --brand-cyan-soft: #d4ebf4;        /* info banner bg */
+  --brand-cyan-faint: #ecf0f2;       /* hover bg, toggle off track */
+
+  /* -------- Neutrals / surfaces -------- */
+  --header-navy: #112233;            /* top utility bar */
+  --page-bg: #f2f6f8;                /* app background */
+  --surface: #ffffff;                /* cards, inputs */
+  --surface-hover: #fafcfd;          /* row hover bg */
+  --border-soft: #e6e6e6;            /* card / divider */
+  --border-input: #cccccc;           /* input border */
+
+  /* -------- Text -------- */
+  --text-primary: #272727;           /* default body, headings */
+  --text-secondary: #5b7a81;         /* muted */
+  --text-on-brand: #ffffff;          /* on cyan sidebar */
+  --text-link: #009ee2;
+
+  /* -------- Status -------- */
+  --success: #34b154;                /* toggle on, check */
+  --success-light: #a1d100;          /* specialty dot lime */
+  --danger: #ff3c52;                 /* specialty dot red, destructive */
+  --warn-bg: #f3efda;                /* yellow banner bg */
+  --warn-bg-soft: #f6ebda;
+  --warn-accent: #fdc007;            /* yellow accent / icon */
+  --warn-text: #c7894c;              /* warning copy color */
+
+  /* -------- Gradients -------- */
+  --grad-sidebar: linear-gradient(to right, #009ee2 0%, #1abadf 50%, #2ccdde 100%);
+  --grad-cta: linear-gradient(180deg, #2accde 0%, #1abadf 100%);
+
+  /* -------- Spacing (4px base) -------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* -------- Radii -------- */
+  --radius-sm: 4px;     /* inputs, small buttons */
+  --radius-md: 6px;     /* cards, banners */
+  --radius-lg: 8px;     /* dropdowns */
+  --radius-pill: 999px; /* pills, dots, toggle */
+
+  /* -------- Shadows -------- */
+  --shadow-card: 0 1px 2px rgba(17, 34, 51, 0.06);
+  --shadow-pop:  0 4px 16px rgba(17, 34, 51, 0.10);
+  --shadow-modal: 0 12px 40px rgba(17, 34, 51, 0.18);
+
+  /* -------- Layout -------- */
+  --sidebar-width: 60px;
+  --header-height: 64px;
+
+  /* -------- Type -------- */
+  --font-sans: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --fs-display: 30px;     /* page title (Servicios) */
+  --fs-h1: 22px;
+  --fs-h2: 18px;          /* section heading (Datos de la consulta) */
+  --fs-h3: 15px;          /* row title */
+  --fs-body: 14px;
+  --fs-label: 12px;       /* form field label */
+  --fs-small: 12px;
+
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --lh-tight: 1.2;
+  --lh-base: 1.55;
+
+  /* -------- Motion -------- */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+}
+
+/* =================================================================
+   Semantic / element styles
+   ================================================================= */
+
+.td-display {
+  font-family: var(--font-sans);
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+}
+
+.td-h1 { font: var(--fw-bold) var(--fs-h1) / var(--lh-tight) var(--font-sans); color: var(--text-primary); }
+.td-h2 { font: var(--fw-bold) var(--fs-h2) / var(--lh-tight) var(--font-sans); color: var(--text-primary); }
+.td-h3 { font: var(--fw-bold) var(--fs-h3) / var(--lh-tight) var(--font-sans); color: var(--text-primary); }
+
+.td-body {
+  font: var(--fw-regular) var(--fs-body) / var(--lh-base) var(--font-sans);
+  color: var(--text-primary);
+}
+
+.td-label {
+  font: var(--fw-bold) var(--fs-label) / 1.3 var(--font-sans);
+  color: var(--text-primary);
+}
+
+.td-muted {
+  font: var(--fw-regular) var(--fs-small) / 1.4 var(--font-sans);
+  color: var(--text-secondary);
+}
+
+.td-link {
+  color: var(--text-link);
+  text-decoration: none;
+  font-weight: var(--fw-bold);
+}
+.td-link:hover { text-decoration: underline; }
+
+/* -------- Reset bridge -------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--page-bg);
+  -webkit-font-smoothing: antialiased;
+}

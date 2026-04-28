@@ -6,6 +6,12 @@
       "sourceType": "github",
       "computedHash": "c19a532a3777698b80b35270939a1dc559da451381971b3e1e78174d1ab54863"
     },
+    "mermaid-diagrams": {
+      "source": "softaworks/agent-toolkit",
+      "sourceType": "github",
+      "skillPath": "skills/mermaid-diagrams/SKILL.md",
+      "computedHash": "6d36e69adad781f106a2fb4b19ebc22bf0c211babdc0d1ae5822fa65abb48bd8"
+    },
     "skill-creator": {
       "source": "anthropics/skills",
       "sourceType": "github",

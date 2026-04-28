@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>body{padding:20px;background:var(--page-bg);}
+.toggle{position:relative;width:48px;height:24px;border-radius:999px;background:var(--brand-cyan-faint);transition:.15s;cursor:pointer;display:inline-block;vertical-align:middle}
+.toggle.on{background:var(--success)}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:.15s}
+.toggle.on::after{left:27px}
+.row{display:flex;gap:24px;align-items:center}
+.lbl{font:700 14px var(--font-sans);color:var(--text-primary)}
+.dot{width:14px;height:14px;border-radius:50%;display:inline-block;vertical-align:middle;margin:0 4px}
+.cb{width:18px;height:18px;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;background:var(--success);color:#fff;vertical-align:middle;font-size:12px;font-weight:900}
+.cb.off{background:#fff;border:1.5px solid var(--border-input)}
+</style></head><body>
+<div class="row">
+  <div><span class="toggle on"></span> <span class="lbl">on</span></div>
+  <div><span class="toggle"></span> <span class="lbl">off</span></div>
+  <div><span class="cb">✓</span> <span class="lbl">checked</span></div>
+  <div><span class="cb off"></span> <span class="lbl">unchecked</span></div>
+  <div><span class="dot" style="background:#ff3c52"></span><span class="dot" style="background:#009ee2"></span><span class="dot" style="background:#a1d100"></span> <span class="lbl">dots</span></div>
+</div>
+</body></html>

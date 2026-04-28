@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>body{padding:20px;background:var(--page-bg);}
+.card{background:#fff;border-radius:6px;box-shadow:var(--shadow-card);padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.toggle{position:relative;width:46px;height:22px;border-radius:999px;background:var(--success);flex-shrink:0}
+.toggle::after{content:"";position:absolute;top:3px;left:27px;width:16px;height:16px;border-radius:50%;background:#fff}
+.toggle.off{background:var(--brand-cyan-faint)}
+.toggle.off::after{left:3px}
+.title{font:700 14px var(--font-sans);flex:1}
+.dots{display:flex;gap:6px}
+.dot{width:14px;height:14px;border-radius:50%}
+.gear{width:36px;height:36px;border-radius:6px;background:#fff;border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;color:var(--text-secondary)}
+.warning{background:var(--warn-bg);padding:6px 14px;border-radius:4px;font:600 12px var(--font-sans);color:var(--warn-text)}
+.warning b{color:#272727}
+.warning .x{color:var(--warn-accent);font-weight:900;margin-right:6px}
+</style></head><body>
+<div class="card"><div class="toggle"></div><div class="title">Primera consulta Acupuntura</div><div class="dots"><div class="dot" style="background:#ff3c52"></div><div class="dot" style="background:#009ee2"></div><div class="dot" style="background:#a1d100"></div></div><div class="gear">⚙</div></div>
+<div class="card"><div class="toggle off"></div><div class="title">Consulta seguimiento Podología</div><div class="warning"><span class="x">!</span>Este servicio está desactivado. <b>Actívelo y configúrelo</b>.</div><div class="gear">⚙</div></div>
+</body></html>
