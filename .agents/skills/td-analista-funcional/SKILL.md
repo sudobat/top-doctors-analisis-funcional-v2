@@ -86,6 +86,14 @@ La primera entrega debe ser una version borrador para validacion del humano:
 
 Tras feedback del usuario, produce la version final.
 
+## Convencion de archivo del spec
+
+- **Nombre obligatorio:** `{nombre-spec}.spec.md`
+  - `nombre-spec` es un identificador descriptivo en **kebab-case** (minusculas, palabras separadas por guiones), sin espacios.
+  - Ejemplos validos: `mejoras-configuracion-agendas-y-citas.spec.md`, `login-medico-primer-acceso.spec.md`.
+- **Ubicacion:** la carpeta que indique el usuario; si no la especifica, usa la convencion del repo (por ejemplo `specs/` en la raiz del proyecto).
+- Al crear o guardar el fichero, usa siempre este sufijo `.spec.md` para distinguir specs funcionales de otros documentos.
+
 ## Reglas de calidad de salida
 
 - Prioriza detalle funcional verificable frente a texto narrativo.
